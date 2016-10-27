@@ -5,27 +5,4 @@
 	<artifactId>02_Hibernate_xml_mapping</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	
-	
-	<packaging>jar</packaging>
-	
-	<dependencies>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.38</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>5.2.3.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>5.2.3.Final</version>
-		</dependency>
-
-	</dependencies>
-
 </project>
