@@ -10,17 +10,20 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Book {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	@ManyToOne(fetch=FetchType.LAZY)
+	private int pages;
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Student student;
 
 	public Book() {
 	}
 
-	public Book(String name) {
+	public Book(String name, int pages) {
+		super();
 		this.name = name;
+		this.pages = pages;
 	}
 
 	public int getId() {
@@ -39,6 +42,14 @@ public class Book {
 		this.name = name;
 	}
 
+	public int getPages() {
+		return pages;
+	}
+
+	public void setPages(int pages) {
+		this.pages = pages;
+	}
+
 	public Student getStudent() {
 		return student;
 	}
@@ -46,5 +57,12 @@ public class Book {
 	public void setStudent(Student student) {
 		this.student = student;
 	}
+
+	@Override
+	public String toString() {
+		return "Book [name=" + name + ", pages=" + pages + ", student=" + student + "]";
+	}
+	
+	
 
 }

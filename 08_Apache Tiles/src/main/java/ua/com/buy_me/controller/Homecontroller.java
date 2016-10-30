@@ -16,4 +16,9 @@ public class Homecontroller {
         return "views-base-home";
     }
 
+    @RequestMapping(value = "/order", method = RequestMethod.GET)
+    public String order(){
+        return "views-base-order";
+    }
+
 }

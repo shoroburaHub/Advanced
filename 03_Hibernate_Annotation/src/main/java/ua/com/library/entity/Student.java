@@ -19,6 +19,7 @@ public class Student {
 	private int id;
 	private String firstName;
 	private String lastName;
+	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="student")
 	private List<Book> books;
 	@ManyToMany(fetch=FetchType.LAZY)
@@ -30,10 +31,9 @@ public class Student {
 	public Student() {
 	}
 
-	public Student(String firstName, String lastName, List<Book> books) {
+	public Student(String firstName, String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.books = books;
 	}
 
 	public int getId() {
@@ -76,5 +76,12 @@ public class Student {
 		this.subjects = subjects;
 	}
 
+	@Override
+	public String toString() {
+		return "Student [firstName=" + firstName + ", lastName=" + lastName + "]";
+	}
+	
+
+	
 	
 }
