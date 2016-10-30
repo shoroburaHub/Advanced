@@ -1,16 +1,13 @@
 package ua.com.library.controller;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import org.hibernate.Hibernate;
-
+import ua.com.library.dao.BookDao;
+import ua.com.library.daoImpl.BookDaoImpl;
 import ua.com.library.entity.Book;
-import ua.com.library.entity.Student;
-import ua.com.library.entity.Subject;
+
 
 public class Main {
 	public static void main(String[] args) {
@@ -59,7 +56,7 @@ public class Main {
 //			manager.merge(book);
 //		}
 
-		Student student = (Student) manager.createQuery("select s from Student s where s.lastName like 'bukina'").getSingleResult();
+//		Student student = (Student) manager.createQuery("select s from Student s where s.lastName like 'bukina'").getSingleResult();
 //		
 //		List<Subject> subjects = manager.createQuery("select s from Subject s where s.name like 'math' or name like 'filosofy'").getResultList();
 //		System.out.println(student);
@@ -67,12 +64,25 @@ public class Main {
 //		
 //		student.setSubjects(subjects);
 		
-//		Hibernate.initialize(student);
+//		Student student = (Student) manager.createQuery("select s from Student s where s.lastName like 'bukina'").getSingleResult();
+//		
+//		System.out.println(student.getLastName() +" "+ student.getSubjects());
+		//delete form table
+//		manager.remove(manager.createQuery("select b from Book b where b.name like 'c++'").getSingleResult())		
 		
-		System.out.println(student.getLastName() +" "+ student.getSubjects());
+		
+		
 		
 		
 		manager.getTransaction().commit();
+		
+		BookDao bookDao = new BookDaoImpl(manager);
+		
+		bookDao.save(new Book("assembler", 1000));
+		
+		
+		
+		
 		manager.close();
 		factory.close();
 
