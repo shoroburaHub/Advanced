@@ -15,8 +15,7 @@ public class BookDaoImpl implements BookDao {
 	public BookDaoImpl(EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}
-	
-	
+
 	public void save(Book book) {
 		entityManager.getTransaction().begin();
 		entityManager.persist(book);
@@ -24,7 +23,7 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	public List<Book> findAll() {
-		return entityManager.createQuery("form Book").getResultList();
+		return entityManager.createNamedQuery("findAllBook").getResultList();
 	}
 
 	public Book findOne(int id) {
@@ -34,10 +33,11 @@ public class BookDaoImpl implements BookDao {
 
 	public void delete(int id) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	
-	
-	
+	public Book findByName(String name) {
+		return (Book) entityManager.createNamedQuery("findBookByName").setParameter("name", name).getSingleResult();
+	}
+
 }

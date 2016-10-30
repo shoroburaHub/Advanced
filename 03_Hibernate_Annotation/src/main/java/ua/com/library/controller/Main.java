@@ -71,16 +71,15 @@ public class Main {
 //		manager.remove(manager.createQuery("select b from Book b where b.name like 'c++'").getSingleResult())		
 		
 		
-		
-		
-		
 		manager.getTransaction().commit();
 		
 		BookDao bookDao = new BookDaoImpl(manager);
 		
-		bookDao.save(new Book("assembler", 1000));
+//		bookDao.save(new Book("assembler", 1000));
 		
-		
+		Book book = bookDao.findByName("java");
+		System.out.println(book);
+		System.out.println(bookDao.findAll());
 		
 		
 		manager.close();

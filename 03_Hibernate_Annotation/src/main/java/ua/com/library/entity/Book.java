@@ -6,7 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+@NamedQueries({
+@NamedQuery(name="findBookByName", query="select b from Book b where b.name like :name"),
+@NamedQuery(name="findAllBook", query="from Book"),
+})
 @Entity
 public class Book {
 	@Id
