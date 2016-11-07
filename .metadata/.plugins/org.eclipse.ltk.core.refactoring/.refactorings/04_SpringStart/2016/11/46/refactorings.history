@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;ua.com.library.daoImpl.AuthorDao&apos; to &apos;AuthorDaoImpl&apos;&#x0A;- Original project: &apos;04_SpringStart&apos;&#x0A;- Original element: &apos;ua.com.library.daoImpl.AuthorDao&apos;&#x0A;- Renamed element: &apos;ua.com.library.daoImpl.AuthorDaoImpl&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;AuthorDao&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src\/main\/java&lt;ua.com.library.daoImpl{AuthorDao.java[AuthorDao" matchStrategy="1" name="AuthorDaoImpl" qualified="false" references="true" similarDeclarations="false" stamp="1478556615942" textual="false" version="1.0"/>
+</session>

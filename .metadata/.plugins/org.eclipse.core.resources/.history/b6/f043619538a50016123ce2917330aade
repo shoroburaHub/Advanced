@@ -1,0 +1,5 @@
+package ua.com.library.serviceImpl;
+
+public class AuthorServiceImpl {
+
+}
