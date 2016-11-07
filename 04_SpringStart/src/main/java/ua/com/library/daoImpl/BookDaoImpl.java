@@ -14,7 +14,7 @@ import ua.com.library.entity.Book;
 @Repository
 public class BookDaoImpl implements BookDao{
 
-	@PersistenceContext(unitName="Primary")
+	@PersistenceContext(unitName="primary")
 	private EntityManager entityManager;
 	@Transactional
 	public void save(Book book) {

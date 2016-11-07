@@ -12,7 +12,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		ConfigurableApplicationContext context = 
-				new ClassPathXmlApplicationContext("primary");
+				new ClassPathXmlApplicationContext("appContext.xml");
 		
 		BookService bookService = (BookService) context.getBean("bookService");
 		

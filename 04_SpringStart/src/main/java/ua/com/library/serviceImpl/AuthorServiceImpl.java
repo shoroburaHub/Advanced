@@ -9,7 +9,7 @@ import ua.com.library.dao.AuthorDao;
 import ua.com.library.entity.Author;
 import ua.com.library.service.AuthorService;
 
-@Service
+@Service("authorService")
 public class AuthorServiceImpl implements AuthorService{
 	
 	@Autowired

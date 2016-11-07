@@ -15,7 +15,7 @@ import ua.com.library.entity.Author;
 @Repository
 public class AuthorDaoImpl implements AuthorDao{
 
-	@PersistenceContext(unitName="Primary")
+	@PersistenceContext(unitName="primary")
 	private EntityManager entityManager;
 	@Transactional
 	public void save(Author author) {
