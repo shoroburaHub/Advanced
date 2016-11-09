@@ -26,12 +26,18 @@ public class BookDaoImpl implements BookDao{
 	}
 	@Transactional
 	public Book findOne(String title) {
-		return (Book) entityManager.createQuery("select b from Boook b where b.title like :title")
+		return (Book) entityManager.createQuery("select b from Book b where b.title like :title")
 				.setParameter("title", title).getSingleResult();
 	}
 	@Transactional
 	public void delete(String title) {
 		entityManager.remove(findOne(title));;
+	}
+	
+	@Transactional
+	@Override
+	public void update(Book book) {
+		entityManager.merge(book);
 	}
 	
 	

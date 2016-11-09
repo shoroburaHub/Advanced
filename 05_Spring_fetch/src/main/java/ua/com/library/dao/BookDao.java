@@ -10,5 +10,6 @@ public interface BookDao {
 	List<Book> findAll();
 	Book findOne(String title);
 	void delete(String title);
+	void update(Book book);
 	
 }

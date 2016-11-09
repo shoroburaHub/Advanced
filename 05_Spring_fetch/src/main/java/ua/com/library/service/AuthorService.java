@@ -10,5 +10,6 @@ public interface AuthorService {
 	List<Author> findAll();
 	Author findOne(String surname);
 	void delete(String surname);
+	Author getAuthorWithBooks(String surname); 
 	
 }

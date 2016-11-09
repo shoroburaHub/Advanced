@@ -10,5 +10,7 @@ public interface AuthorDao {
 	List<Author> findAll();
 	Author findOne(String surname);
 	void delete(String surname);
+	void update(Author author);
+	Author getAuthorWithBooks(String surname);
 	
 }

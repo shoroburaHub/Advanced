@@ -30,6 +30,11 @@ public class AuthorServiceImpl implements AuthorService{
 	public void delete(String surname) {
 		authorDao.delete(surname);
 	}
+
+	@Override
+	public Author getAuthorWithBooks(String surname) {
+		return authorDao.getAuthorWithBooks(surname);
+	}
 	
 	
 	

@@ -28,14 +28,27 @@ public class AuthorDaoImpl implements AuthorDao{
 	@Transactional
 	public Author findOne(String surname) {
 		return (Author) entityManager.createQuery
-				("select a from Author a where a.surnmae like :surname")
-				.setParameter("surnmae", surname).getSingleResult();
+				("select a from Author a where a.surname like :surname")
+				.setParameter("surname", surname).getSingleResult();
 	}
 	@Transactional
 	public void delete(String surname) {
 		entityManager.remove(findOne(surname));
 	}
 	
+	@Transactional	
+	@Override
+	public Author getAuthorWithBooks(String surname) {
+		return (Author) entityManager.createQuery
+				("select a from Author a left join fetch a.books where a.surname like :surname")
+				.setParameter("surname", surname).getSingleResult();
+	}
+	
+	@Transactional
+	@Override
+	public void update(Author author) {
+		entityManager.merge(author);
+	}
 	
 	
 	
