@@ -12,8 +12,5 @@ public interface BookService {
 	void delete(String title);
 	void update(Book book);
 	
-	List<Book> findAllBy1000();
-	
-	
 	public Book findBookWithUsers(String title);
 }

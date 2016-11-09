@@ -18,8 +18,8 @@ public class Main {
 				new ClassPathXmlApplicationContext("appContext.xml");
 		
 		BookService bookService = (BookService) context.getBean("bookService");
-		
-		Book book = bookService.findOne("assembler");
+				
+		Book book = bookService.findBookWithUsers("assembler");
 		
 		System.out.println(book.getUsers());
 		
