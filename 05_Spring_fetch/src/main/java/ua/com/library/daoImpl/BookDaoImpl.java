@@ -16,6 +16,7 @@ public class BookDaoImpl implements BookDao{
 
 	@PersistenceContext(unitName="primary")
 	private EntityManager entityManager;
+	
 	@Transactional
 	public void save(Book book) {
 		entityManager.persist(book);
@@ -23,11 +24,15 @@ public class BookDaoImpl implements BookDao{
 	@Transactional
 	public List<Book> findAll() {
 		return entityManager.createQuery("from Book").getResultList();
+		
 	}
+	
 	@Transactional
 	public Book findOne(String title) {
 		return (Book) entityManager.createQuery("select b from Book b where b.title like :title")
 				.setParameter("title", title).getSingleResult();
+		
+		
 	}
 	@Transactional
 	public void delete(String title) {
@@ -39,7 +44,22 @@ public class BookDaoImpl implements BookDao{
 	public void update(Book book) {
 		entityManager.merge(book);
 	}
+	@Override
+	public Book findBookWithUsers(String title) {
+		return (Book) entityManager.createQuery
+				("select b from Book b left join fetch b.users "
+						+ "where b.title like :title")
+				.setParameter("title", title).getSingleResult();
+		
+	}
+	
+	
 	
 	
 	
 }
+
+
+
+
+

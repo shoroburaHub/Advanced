@@ -19,9 +19,13 @@ public class Main {
 		
 		BookService bookService = (BookService) context.getBean("bookService");
 		
-		AuthorService authorService = (AuthorService) context.getBean("authorService");
+		Book book = bookService.findOne("assembler");
 		
-		UserService userService = (UserService) context.getBean("userService");
+		System.out.println(book.getUsers());
+		
+//		AuthorService authorService = (AuthorService) context.getBean("authorService");
+//		
+//		UserService userService = (UserService) context.getBean("userService");
 	
 //		bookService.save(new Book("java", 1000));
 //		bookService.save(new Book("c#", 200));
@@ -32,20 +36,19 @@ public class Main {
 		
 //		Author author = authorService.getAuthorWithBooks("King");
 //		
-		Book book = bookService.findOne("assembler");
 //		book.setAuthor(author);
 //		
 //		bookService.update(book);
-//		
+
 //		System.out.println(author.getBooks());
 		
 //		userService.save(new User("koko", "shorobura.mukola@gmail.com", "koko", "+380989783447"));
 		
-		User user = userService.findUserWithBooks("koko");
-		
-		user.getBooks().add(book);
-		
-		userService.update(user);
+//		User user = userService.findUserWithBooks("koko");
+//		
+//		user.getBooks().add(book);
+//		
+//		userService.update(user);
 		
 		
 	}

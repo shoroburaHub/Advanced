@@ -3,6 +3,7 @@ package ua.com.library.entity;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +23,9 @@ public class Book {
 	private Author author;
 
 	@ManyToMany
-	@JoinTable(name = "user_book", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+	@JoinTable(name = "user_book", 
+	joinColumns = @JoinColumn(name = "book_id"), 
+	inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> users;
 
 	public Book() {
