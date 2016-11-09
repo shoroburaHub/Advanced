@@ -6,7 +6,7 @@
   <packaging>jar</packaging>
   
   <properties>
-        <spring.framework>4.3.3.RELEASE</spring.framework>
+        <spring.framework>4.3.4.RELEASE</spring.framework>
   </properties>
 
 
@@ -56,22 +56,22 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
-            <version>4.3.1.RELEASE</version>
+            <version>${spring.framework}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
-            <version>4.3.1.RELEASE</version>
+            <version>${spring.framework}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>4.3.1.RELEASE</version>
+            <version>${spring.framework}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>4.3.1.RELEASE</version>
+            <version>${spring.framework}</version>
         </dependency>
 
     
