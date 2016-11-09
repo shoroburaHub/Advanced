@@ -44,6 +44,7 @@ public class BookDaoImpl implements BookDao{
 	public void update(Book book) {
 		entityManager.merge(book);
 	}
+	@Transactional
 	@Override
 	public Book findBookWithUsers(String title) {
 		return (Book) entityManager.createQuery
