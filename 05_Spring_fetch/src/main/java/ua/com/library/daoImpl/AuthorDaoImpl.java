@@ -13,18 +13,11 @@ import ua.com.library.entity.Author;
 
 
 @Repository
-public class AuthorDaoImpl implements AuthorDao{
+public class AuthorDaoImpl extends GeneralDaoImpl<Author> implements AuthorDao{
 
 	@PersistenceContext(unitName="primary")
 	private EntityManager entityManager;
-	@Transactional
-	public void save(Author author) {
-		entityManager.persist(author);
-	}
-	@Transactional
-	public List<Author> findAll() {
-		return entityManager.createQuery("from Author").getResultList();
-	}
+
 	@Transactional
 	public Author findOne(String surname) {
 		return (Author) entityManager.createQuery
@@ -43,13 +36,5 @@ public class AuthorDaoImpl implements AuthorDao{
 				("select a from Author a left join fetch a.books where a.surname like :surname")
 				.setParameter("surname", surname).getSingleResult();
 	}
-	
-	@Transactional
-	@Override
-	public void update(Author author) {
-		entityManager.merge(author);
-	}
-	
-	
-	
+		
 }

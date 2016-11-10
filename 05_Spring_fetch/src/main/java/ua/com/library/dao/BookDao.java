@@ -1,16 +1,15 @@
 package ua.com.library.dao;
 
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 import ua.com.library.entity.Book;
 
-public interface BookDao {
+public interface BookDao extends GeneralDao<Book>{
 
-	void save(Book book);
-	List<Book> findAll();
-	Book findOne(String title);
-	void delete(String title);
-	void update(Book book);
+	
+	public Book findOne(String title);
+
+	public void delete(String title);
 	
 	Book findBookWithUsers(String title);
 	

@@ -12,38 +12,23 @@ import ua.com.library.dao.BookDao;
 import ua.com.library.entity.Book;
 
 @Repository
-public class BookDaoImpl implements BookDao{
+public class BookDaoImpl extends GeneralDaoImpl<Book> implements BookDao{
 
 	@PersistenceContext(unitName="primary")
-	private EntityManager entityManager;
-	
-	@Transactional
-	public void save(Book book) {
-		entityManager.persist(book);
-	}
-	@Transactional
-	public List<Book> findAll() {
-		return entityManager.createQuery("from Book").getResultList();
-		
-	}
+	private EntityManager entityManager; 
 	
 	@Transactional
 	public Book findOne(String title) {
 		return (Book) entityManager.createQuery("select b from Book b where b.title like :title")
 				.setParameter("title", title).getSingleResult();
-		
-		
+			
 	}
+	
 	@Transactional
 	public void delete(String title) {
 		entityManager.remove(findOne(title));;
 	}
 	
-	@Transactional
-	@Override
-	public void update(Book book) {
-		entityManager.merge(book);
-	}
 	@Transactional
 	@Override
 	public Book findBookWithUsers(String title) {
@@ -53,14 +38,4 @@ public class BookDaoImpl implements BookDao{
 				.setParameter("title", title).getSingleResult();
 		
 	}
-	
-	
-	
-	
-	
 }
-
-
-
-
-

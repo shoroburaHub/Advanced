@@ -12,23 +12,13 @@ import ua.com.library.dao.UserDao;
 import ua.com.library.entity.User;
 
 @Repository
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl extends GeneralDaoImpl<User> implements UserDao {
 
 	@PersistenceContext(unitName = "primary")
 	private EntityManager entityManager;
 
-	@Transactional
-	@Override
-	public void save(User user) {
-		entityManager.persist(user);
-	}
 
-	@Transactional
-	@Override
-	public List<User> findAll() {
-		return entityManager.createNamedQuery("User.findAll").getResultList();
-	}
-
+	
 	@Transactional
 	@Override
 	public User findOne(String username) {
@@ -42,12 +32,6 @@ public class UserDaoImpl implements UserDao {
 		entityManager.remove(findOne(username));
 	}
 
-	@Transactional
-	@Override
-	public void update(User user) {
-		entityManager.merge(user);
-	}
-	
 	@Transactional
 	@Override
 	public User findUserWithBooks(String username) {
