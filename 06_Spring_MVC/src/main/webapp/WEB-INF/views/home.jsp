@@ -9,5 +9,16 @@
 </head>
 <body>
 home
+
+<br>
+
+${max }
+
+<form action="link" method="get">
+	
+	<input name="someInput">
+	<button>click</button>
+</form>
+
 </body>
 </html>
