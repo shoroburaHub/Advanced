@@ -10,19 +10,34 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class HomeController {
 
 	@RequestMapping(value="/", method=RequestMethod.GET)
-	public String home(Model model){
-		model.addAttribute("max", Integer.MAX_VALUE);
+	public String home(){
+	
 		return "home";
 	}
 	
-	@RequestMapping(value="/link", method=RequestMethod.GET)
-	public String link(@RequestParam String someInput){
+	@RequestMapping(value="/signUp", method=RequestMethod.GET)
+	public String signUp(Model model){
 		
-		System.out.println(someInput);
+		model.addAttribute("max", Integer.MAX_VALUE);
 		
-		
-		return "redirect:/";
+		return "signUp";
 	}
 	
-	
+	@RequestMapping(value="/click", method=RequestMethod.POST)
+	public String click(@RequestParam String username,
+			@RequestParam String password){
+		
+		System.out.println(username);
+		System.out.println(password);
+		
+		return "signUp";
+	}
 }
+
+
+
+
+
+
+
+
