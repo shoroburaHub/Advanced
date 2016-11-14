@@ -3,7 +3,7 @@ package fb.service;
 
 import java.util.List;
 
-import fb.entity.Users;
+import fb.entity.User;
 
 public interface UsersService {
 
@@ -13,8 +13,8 @@ public interface UsersService {
 
     public void deleteUser(int id);
 
-    public Users findById(int id);
+    public User findById(int id);
 
-    public List<Users> findAllUsers();
+    public List<User> findAllUsers();
 
 }

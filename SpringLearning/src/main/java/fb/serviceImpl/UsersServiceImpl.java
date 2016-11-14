@@ -1,11 +1,11 @@
 package fb.serviceImpl;
 
+import fb.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fb.dao.UsersDao;
-import fb.entity.Users;
 import fb.service.UsersService;
 
 import java.util.List;
@@ -18,13 +18,13 @@ public class UsersServiceImpl implements UsersService {
 
     @Transactional
     public void addNewUser(String name, String secondname, String login, String password, String mail, String phone) {
-        Users user = new Users(name, secondname, login, password, mail, phone);
+        User user = new User(name, secondname, login, password, mail, phone);
         usersDao.save(user);
     }
 
     @Transactional
     public void editUser(int id, String name, String secondname, String login, String password, String mail, String phone) {
-        Users user = usersDao.findOne(id);
+        User user = usersDao.findOne(id);
         if (name != null) {
             user.setName(name);
         }
@@ -48,17 +48,17 @@ public class UsersServiceImpl implements UsersService {
 
     @Transactional
     public void deleteUser(int id) {
-        Users user = usersDao.findOne(id);
+        User user = usersDao.findOne(id);
         usersDao.delete(user);
     }
 
     @Transactional
-    public Users findById(int id) {
+    public User findById(int id) {
         return usersDao.findOne(id);
     }
 
     @Transactional
-    public List<Users> findAllUsers() {
+    public List<User> findAllUsers() {
         return usersDao.findAll();
     }
 }

@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 
 @Entity
-public class Users {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
@@ -25,11 +25,11 @@ public class Users {
     @Column
     private String phone;
 
-    public Users(){
+    public User(){
     	
     }
     
-    public Users(String name, String secondname, String login, String password, String mail, String phone) {
+    public User(String name, String secondname, String login, String password, String mail, String phone) {
         this.name = name;
         this.secondname = secondname;
         this.login = login;
@@ -97,7 +97,7 @@ public class Users {
 
     @Override
     public String toString() {
-        return "Users{" +
+        return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", secondname='" + secondname + '\'' +

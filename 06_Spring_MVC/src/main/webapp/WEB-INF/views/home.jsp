@@ -12,6 +12,8 @@ home
 
 <a href="signUp">sign up</a>
 
+${key}
+
 
 </body>
-</html>
+</html> 
