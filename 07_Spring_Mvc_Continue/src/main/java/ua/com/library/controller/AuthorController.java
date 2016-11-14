@@ -15,27 +15,21 @@ public class AuthorController {
 
 	@Autowired
 	private AuthorService authorService;
-	
-	@RequestMapping(value="/newAuthor", method=RequestMethod.GET)
-	public String newAuthor(Model model){
-		model.addAttribute("authors", authorService.findAll());
+
+	@RequestMapping(value = "/newAuthor", method = RequestMethod.GET)
+	public String newAuthor() {
+
 		return "newAuthor";
 	}
-	
-	@RequestMapping(value="/saveAuthor", method=RequestMethod.POST)
-	public String saveAuthor(@RequestParam String authorName,
-			@RequestParam String authorSurName){
-		
+
+	@RequestMapping(value = "/saveAuthor", method = RequestMethod.POST)
+	public String saveAuthor(@RequestParam String authorName, @RequestParam String authorSurName) {
+
 		Author author = new Author(authorName, authorSurName);
-		
+
 		authorService.save(author);
-		
+
 		return "redirect:/newAuthor";
 	}
-	
-	
+
 }
-
-
-
-

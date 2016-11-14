@@ -7,18 +7,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-author
+student
 
-<%-- ${authors} --%>
-
-<form action="saveAuthor" method="post">
-	<input name="authorName" placeholder="author name">
+<form action="saveUser" method="post">
+	<input name="username" placeholder="username">
 	<br>
-	<input name="authorSurName" placeholder="author surname">
+	<input name="email" type="email" placeholder="email">
 	<br>
-	<button>save author</button>
+	<input name="password" type="password" placeholder="password">
+	<br>
+	<input name="phone" placeholder="phone">
+	<br>
+	<button>save user</button>
 </form>
-
 
 
 </body>
