@@ -7,17 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-student
+user
 
 <form action="saveUser" method="post">
 	<input name="username" placeholder="username">
-	<br>
 	<input name="email" type="email" placeholder="email">
-	<br>
-	<input name="password" type="password" placeholder="password">
-	<br>
+	<input name="pass" type="password" placeholder="password">
 	<input name="phone" placeholder="phone">
-	<br>
 	<button>save user</button>
 </form>
 

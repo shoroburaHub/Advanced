@@ -14,7 +14,7 @@ home
 <br>
 <a href="newBook">add book</a>
 <br>
-<a href="newStudent">add student</a>
+<a href="newUser">add user</a>
 
 </body>
 </html> 

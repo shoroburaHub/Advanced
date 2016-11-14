@@ -35,8 +35,4 @@ public class AuthorServiceImpl implements AuthorService{
 		return authorDao.getAuthorWithBooks(surname);
 	}
 	
-	
-	
-	
-
 }

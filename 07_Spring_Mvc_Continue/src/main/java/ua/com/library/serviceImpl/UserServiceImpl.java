@@ -41,7 +41,10 @@ public class UserServiceImpl implements UserService {
 	public User findUserWithBooks(String username) {
 		return userDao.findUserWithBooks(username);
 	}
-	
-	
 
+	
+	
+	
+	
+	
 }

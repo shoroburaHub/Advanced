@@ -12,5 +12,6 @@ public interface UserService {
 	void delete(String username);
 	void update(User user);
 	User findUserWithBooks(String username);
+
 	
 }
