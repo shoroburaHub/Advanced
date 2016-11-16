@@ -12,6 +12,7 @@
 <body>
 <%-- ${users} --%>
 
+
 <c:forEach var="user" items="${users}">
 	<div style="background-color: aqua">	
 		${user.username} ${user.email} 
