@@ -2,6 +2,8 @@ package ua.com.library.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,8 +20,8 @@ public class UserController {
 	private UserService userService; 
 	
 	@RequestMapping(value = "/newUser", method = RequestMethod.GET)
-	public String newUser() {
-
+	public String newUser(Model model) {
+		model.addAttribute("users", userService.findAll());
 		return "newUser";
 	}
 	
@@ -32,6 +34,16 @@ public class UserController {
 		User user = new User(username, email, pass, phone);
 		
 		userService.save(user);
+		
+		return "redirect:/newUser";
+	}
+	
+	
+	
+	@RequestMapping(value = "/deleteUser/{id}", method = RequestMethod.GET)
+	public String newUser(@PathVariable int id) {
+
+		userService.delete(id);
 		
 		return "redirect:/newUser";
 	}

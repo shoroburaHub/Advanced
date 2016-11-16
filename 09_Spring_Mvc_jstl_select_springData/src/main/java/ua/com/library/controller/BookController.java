@@ -1,7 +1,11 @@
 package ua.com.library.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,8 +20,11 @@ public class BookController {
 	private BookService bookService;
 	
 	@RequestMapping(value = "/newBook", method = RequestMethod.GET)
-	public String newBook() {
-
+	public String newBook(Model model) {
+		
+		List<Book> booksFromDB = bookService.findAll();
+		
+		model.addAttribute("books", booksFromDB);
 		return "newBook";
 	}
 	
@@ -29,10 +36,16 @@ public class BookController {
 		
 		bookService.save(book);
 		
-		return "newBook";
+		return "redirect:/newBook";
 	}	
 	
-	
+	@RequestMapping(value = "/deleteBook/{id}", method = RequestMethod.GET)
+	public String newBook(@PathVariable int id) {
+		
+		bookService.delete(id);
+		
+		return "redirect:/newBook";
+	}
 	
 	
 	
