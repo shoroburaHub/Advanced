@@ -6,7 +6,9 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import ua.com.library.dao.BookDao;
 import ua.com.library.dao.UserDao;
 import ua.com.library.entity.Book;
 import ua.com.library.entity.User;
@@ -17,6 +19,8 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private BookDao bookDao;
 
 	public void save(User user) {
 		userDao.save(user);
@@ -34,6 +38,39 @@ public class UserServiceImpl implements UserService {
 	public void delete(int id) {
 		userDao.delete(id);
 	}
+	
+	@Transactional
+	public void addBooksForUser(int idUser, String[] bookIds) {
+		
+		User user = userDao.findOne(idUser);
+		
+		for (int i = 0; i < bookIds.length; i++) {
+			
+			Book book = bookDao.findOne(Integer.parseInt(bookIds[i]));
+			
+			user.getBooks().add(book);
+			
+			userDao.save(user);
+			
+//			book.getUsers().add(user);
+//			
+//			bookDao.save(book);
+//			
+			
+		}
+		
+		
+		
+	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

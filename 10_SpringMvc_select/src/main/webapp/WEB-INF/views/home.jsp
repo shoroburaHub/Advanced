@@ -19,14 +19,14 @@
 	<a href="newUser">add user</a>
 
 	<form action="addBooksToUser" method="post">
-		<select name="bookId" multiple="multiple">
-			<c:forEach var="user" items="${users}">
-				<option value="${book.id }">${user.username}</option>
+		<select name="bookIds" multiple="multiple">
+			<c:forEach var="book" items="${books}">
+				<option value="${book.id }">${book.title}</option>
 			</c:forEach>
 		</select>
 		<select name="userId">
-			<c:forEach var="book" items="${books}">
-				<option value="${user.id}">${book.title}</option>
+			<c:forEach var="user" items="${users}">
+				<option value="${user.id}">${user.username}</option>
 			</c:forEach>
 		</select>
 		<button>save</button>

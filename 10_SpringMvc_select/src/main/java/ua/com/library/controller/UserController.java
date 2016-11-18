@@ -47,14 +47,15 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping(value = "/addBooksToUser", method = RequestMethod.GET)
+	@RequestMapping(value = "/addBooksToUser", method = RequestMethod.POST)
 	public String newUser(@RequestParam String userId,
-			@RequestParam String [] bookId)  {
+			@RequestParam String [] bookIds)  {
 
+		userService.addBooksForUser(Integer.parseInt(userId), bookIds);
 		
 		
 		
-		return "redirect:/home";
+		return "redirect:/";
 	}
 	
 	
