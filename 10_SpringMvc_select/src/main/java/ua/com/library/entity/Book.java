@@ -1,5 +1,6 @@
 package ua.com.library.entity;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -20,6 +21,7 @@ public class Book {
 	private int id;
 	private String title;
 	private int pages;
+	private LocalDate dateofPublic;
 	@ManyToOne
 	private Author author;
 
@@ -79,5 +81,15 @@ public class Book {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
+
+	public LocalDate getDateofPublic() {
+		return dateofPublic;
+	}
+
+	public void setDateofPublic(LocalDate dateofPublic) {
+		this.dateofPublic = dateofPublic;
+	}
+	
+	
 
 }

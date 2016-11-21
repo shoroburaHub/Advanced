@@ -11,7 +11,8 @@ public interface UserService {
 	User findOne(int id);
 	void delete(int id);
 	
-	void addBooksForUser(int idUser, String [] bookIds);
+	void addBooksForUser(String userId, String [] bookIds);
+	
 
 	
 }

@@ -11,6 +11,10 @@ public interface AuthorService {
 	Author findOne(int id);
 	void delete(int id);
 	
-	void addBookToAuthor(Author author, int idBook);
+	void addBookToAuthor(Author author, String [] bookIds);
+	
+	void deleteBookFromAuthor(String idBook);
+	
+	List<Author> findAuthorWithBooks();
 	
 }

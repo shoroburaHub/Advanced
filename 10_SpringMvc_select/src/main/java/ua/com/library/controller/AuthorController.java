@@ -1,10 +1,7 @@
 package ua.com.library.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +23,7 @@ public class AuthorController {
 
 	@RequestMapping(value = "/newAuthor", method = RequestMethod.GET)
 	public String newAuthor(Model model) {
-		model.addAttribute("authors", authorService.findAll());
+		model.addAttribute("authors", authorService.findAuthorWithBooks());
 		model.addAttribute("books", bookService.findAll());
 		return "newAuthor";
 	}
@@ -34,11 +31,11 @@ public class AuthorController {
 	@RequestMapping(value = "/saveAuthor", method = RequestMethod.POST)
 	public String saveAuthor(@RequestParam String authorName,
 			@RequestParam String authorSurName,
-			@RequestParam String bookId) {
+			@RequestParam String [] bookId) {
 
 		Author author = new Author(authorName, authorSurName);
 
-		authorService.addBookToAuthor(author, Integer.parseInt(bookId));
+		authorService.addBookToAuthor(author, bookId);
 
 		return "redirect:/newAuthor";
 	}
@@ -50,7 +47,13 @@ public class AuthorController {
 	}
 	
 	
-	
+	@RequestMapping(value="/deleteBookFromAuthor/{idBook}")
+	public String deleteBookFromAuthor(@PathVariable String idBook){
+		
+		authorService.deleteBookFromAuthor(idBook);
+		
+		return "redirect:/newAuthor";
+	}
 
 	
 	

@@ -13,8 +13,8 @@ import ua.com.library.entity.Book;
 import ua.com.library.service.AuthorService;
 
 @Service
-public class AuthorServiceImpl implements AuthorService{
-	
+public class AuthorServiceImpl implements AuthorService {
+
 	@Autowired
 	private AuthorDao authorDao;
 	@Autowired
@@ -35,19 +35,35 @@ public class AuthorServiceImpl implements AuthorService{
 	public void delete(int id) {
 		authorDao.delete(id);
 	}
+
 	@Transactional
-	public void addBookToAuthor(Author author, int idBook) {
-		
+	public void addBookToAuthor(Author author, String[] bookIds) {
+
 		authorDao.saveAndFlush(author);
+
+		for (int i = 0; i < bookIds.length; i++) {
+			Book book = bookDao.findOne(Integer.parseInt(bookIds[i]));
+			book.setAuthor(author);
+			bookDao.save(book);
+
+		}
+
+	}
+
+	public List<Author> findAuthorWithBooks() {
+		return authorDao.findAuthorWithBook();
+	}
+	
+	@Transactional
+	public void deleteBookFromAuthor(String idBook) {
 		
-		Book book = bookDao.findOne(idBook);
+		Book book = bookDao.findOne(Integer.parseInt(idBook));
 		
-		book.setAuthor(author);
+		book.setAuthor(null);
 		
 		bookDao.save(book);
-		
-	}	
-	
-	
-	 
+	}
+
+
+
 }

@@ -15,8 +15,13 @@
 
 	<c:forEach var="author" items="${authors}">
 		${author.name} ${author.surname}
-		<a href="deleteAuthor/${author.id}">delete</a>
-		<br>
+		<a href="deleteAuthor/${author.id}">delete author</a>
+		
+		<c:forEach var="book" items="${author.books}">
+			${book.title}
+			<a href="deleteBookFromAuthor/${book.id}">delete book</a>
+			
+		</c:forEach>
 	</c:forEach>
 	
 
@@ -30,13 +35,14 @@
 		<input name="authorSurName" placeholder="author surname"> 
 		
 		<select name="bookId" multiple="multiple">
-			<option>choose book</option>
+		
 			<c:forEach var="book" items="${books}">
-				
-				<option value="${book.id}">${book.title} ${book.pages}</option>
+			
+				<option value="${book.id}">${book.title } ${book.pages}</option>
 				
 			</c:forEach>
 			
+		
 		</select>
 		
 		

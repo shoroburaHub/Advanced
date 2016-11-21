@@ -34,28 +34,26 @@ public class UserServiceImpl implements UserService {
 		return userDao.findOne(id);
 	}
 
-
 	public void delete(int id) {
 		userDao.delete(id);
 	}
-	
 	@Transactional
-	public void addBooksForUser(int idUser, String[] bookIds) {
+	public void addBooksForUser(String userId, String[] bookIds) {
 		
-		User user = userDao.findOne(idUser);
+		User user = userDao.findOne(Integer.parseInt(userId));
 		
 		for (int i = 0; i < bookIds.length; i++) {
 			
+//			user.getBooks().add(bookDao.findOne(Integer.parseInt(bookIds[i])));
+//			
+//			userDao.save(user);
+			
 			Book book = bookDao.findOne(Integer.parseInt(bookIds[i]));
 			
-			user.getBooks().add(book);
+			book.getUsers().add(user);
 			
-			userDao.save(user);
+			bookDao.save(book);
 			
-//			book.getUsers().add(user);
-//			
-//			bookDao.save(book);
-//			
 			
 		}
 		
@@ -64,13 +62,5 @@ public class UserServiceImpl implements UserService {
 	}
 
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
