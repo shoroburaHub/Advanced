@@ -1,5 +1,6 @@
 package ua.com.library.serviceImpl;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +33,26 @@ public class AuthorServiceImpl implements AuthorService {
 		return authorDao.findOne(id);
 	}
 
+	@Transactional
 	public void delete(int id) {
-		authorDao.delete(id);
+//		authorDao.delete(id);\
+		
+		Author author = authorDao.findAuthorWithBook(id);
+		
+		for(Book book : author.getBooks()){
+			book.setAuthor(null);
+			bookDao.save(book);
+		}
+		
+		authorDao.delete(author);
+		
 	}
 
+	public List<Author> findAuthorWithBooks() {
+		return authorDao.findAuthorWithBook();
+	}
+
+	
 	@Transactional
 	public void addBookToAuthor(Author author, String[] bookIds) {
 
@@ -50,9 +67,6 @@ public class AuthorServiceImpl implements AuthorService {
 
 	}
 
-	public List<Author> findAuthorWithBooks() {
-		return authorDao.findAuthorWithBook();
-	}
 	
 	@Transactional
 	public void deleteBookFromAuthor(String idBook) {

@@ -37,6 +37,7 @@ public class UserServiceImpl implements UserService {
 	public void delete(int id) {
 		userDao.delete(id);
 	}
+	
 	@Transactional
 	public void addBooksForUser(String userId, String[] bookIds) {
 		

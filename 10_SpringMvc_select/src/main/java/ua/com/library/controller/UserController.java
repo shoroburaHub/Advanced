@@ -3,6 +3,7 @@ package ua.com.library.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,16 +23,18 @@ public class UserController {
 	@RequestMapping(value = "/newUser", method = RequestMethod.GET)
 	public String newUser(Model model) {
 		model.addAttribute("users", userService.findAll());
+		model.addAttribute("user", new User());
 		return "newUser";
 	}
 	
 	@RequestMapping(value = "/saveUser", method = RequestMethod.POST)
-	public String saveUser(@RequestParam String username,
+	public String saveUser(/*@RequestParam String username,
 			@RequestParam String email,
 			@RequestParam String pass,
-			@RequestParam String phone) {
+			@RequestParam String phone*/
+			@ModelAttribute User user) {
 
-		User user = new User(username, email, pass, phone);
+//		User user = new User(username, email, pass, phone);
 		
 		userService.save(user);
 		

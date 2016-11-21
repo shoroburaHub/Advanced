@@ -35,8 +35,12 @@ public class BookController {
 	@RequestMapping(value = "/saveBook", method = RequestMethod.POST)
 	public String saveBook(/*@RequestParam String title,
 			@RequestParam int pages*/
+			
 			@ModelAttribute Book book,
+			@RequestParam String pages,
 			@RequestParam String  date) {
+		
+		book.setPages(Integer.parseInt(pages));
 		
 		LocalDate localDate = LocalDate.parse(date);
 		

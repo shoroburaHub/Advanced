@@ -22,6 +22,7 @@
 			<a href="deleteBookFromAuthor/${book.id}">delete book</a>
 			
 		</c:forEach>
+		<br>
 	</c:forEach>
 	
 
