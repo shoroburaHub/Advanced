@@ -11,32 +11,29 @@
 <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
-	home
-	<br>
-	<a href="newAuthor">add author</a>
-	<br>
-	<a href="newBook">add book</a>
-	<br>
-	<a href="newUser">add user</a>
-	<br>
-	<a href="newCountry">add country</a>
 
-	<form action="addBookToUser" method="post">
-	
-		<select name="userId">
-			<c:forEach var="user" items="${users}">
-				<option value="${user.id}">${user.username}</option>
-			</c:forEach>
-		</select>
+	<div>
+		<a href="newAuthor">add author</a>
+		<br>
+		<a href="newBook">add book</a>
+		<br>
+		<a href="newUser">add user</a>
+		<br>
+		<a href="newCountry">add country</a>
+		<br>
+		<a href="newCity">add city</a>
 		
-		<select name="bookIds" multiple="multiple">
-			<c:forEach var="book" items="${books}">
-				<option value="${book.id}">${book.title}</option>
-			</c:forEach>
-		</select>
-		
-		<button>add book to user</button>
-	</form>
+	</div>
+
+	<br>	
+	<br>	
+	<br>	
+
+	<c:forEach var="book" items="${books}">
+		${book.title}
+		<br>
+	</c:forEach>
+
 
 
 </body>

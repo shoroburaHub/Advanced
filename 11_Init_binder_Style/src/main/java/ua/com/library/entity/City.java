@@ -6,24 +6,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Country {
+public class City {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	@OneToMany(mappedBy = "country")
-	private List<Book> books;
-	@OneToMany(mappedBy = "country")
-	private List<City> cities;
-
-	public Country() {
+	
+	@ManyToOne
+	private Country country;
+	
+	public City() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Country(String name) {
+	public City(String name) {
+		super();
 		this.name = name;
 	}
 
@@ -43,22 +43,13 @@ public class Country {
 		this.name = name;
 	}
 
-	public List<Book> getBooks() {
-		return books;
+	public Country getCountry() {
+		return country;
 	}
 
-	public void setBooks(List<Book> books) {
-		this.books = books;
-	}
-
-	public List<City> getCities() {
-		return cities;
-	}
-
-	public void setCities(List<City> cities) {
-		this.cities = cities;
+	public void setCountry(Country country) {
+		this.country = country;
 	}
 	
 	
-
 }

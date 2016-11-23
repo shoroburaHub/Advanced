@@ -10,6 +10,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+
+
+<link rel="stylesheet" href="css/author.css">
+
 </head>
 <body>
 
@@ -28,22 +32,28 @@
 	</c:forEach>
 
 
-	<form:form modelAttribute="author" action="saveAuthor" method="post">
+	<%-- <form:form modelAttribute="author" action="saveAuthor" method="post">
 		<form:input path="name" />
 		<form:input path="surname" />
-
-		<%-- <form:select path="books" items="${books}" itemLabel="title"
-			itemValue="id">
-		</form:select>
- --%>
-
-		<%-- <select name="bookIds" multiple="multiple">
-			<c:forEach var="book" items="${books}">
-				<option value="${book.id}">${book.title}</option>
-			</c:forEach>
-		</select> --%>
 		<button>save author</button>
-	</form:form>
+	</form:form> --%>
+
+<div class="login">
+  <div class="login-triangle"></div>
+  
+  <h2 class="login-header">new Author</h2>
+
+  <form:form modelAttribute="author" action="saveAuthor" method="post" class="login-container">
+    <p><form:input path="name"  type="text" placeholder="author name"/></p>
+    <p><form:input path="surname" type="text" placeholder="author surname"/></p>
+    <p><input type="submit" value="save author"></p>
+  </form:form>
+</div>
+
+
+
+
+
 
 </body>
 </html>

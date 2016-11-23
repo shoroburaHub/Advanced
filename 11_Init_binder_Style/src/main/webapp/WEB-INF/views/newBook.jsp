@@ -10,6 +10,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+
+
+
 </head>
 <body>
 
@@ -22,13 +25,14 @@
 	</c:forEach>
 
 	<form:form modelAttribute="book" action="saveBook" method="post">
-		<form:input path="title" />
+		<form:input path="title" placeholder="title"/>
 		<input name="pages" type="number" />
 		<input name="date" type="date">
 
 		<form:select path="country" items="${countries}" itemLabel="name"
 			itemValue="id">
 		</form:select>
+		
 		<form:select path="author" items="${authors}" itemLabel="surname"
 			itemValue="id">
 		</form:select>

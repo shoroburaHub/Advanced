@@ -8,6 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/newCountry.css">
 </head>
 <body>
 
@@ -16,10 +17,22 @@
 	<br>
 </c:forEach>
 
-<form:form modelAttribute="country" action="newCountry" method="post">
+<%-- <form:form modelAttribute="country" action="newCountry" method="post">
 	<form:input path="name" placeholder="country name"/>
 	<button>save country</button>
-</form:form>
+</form:form> --%>
+
+<div class="login">
+  <div class="login-triangle"></div>
+  
+  <h2 class="login-header">new country</h2>
+
+  <form:form modelAttribute="country" action="newCountry" method="post" class="login-container">
+    <p><form:input path="name" type="text" placeholder="name country"/></p>
+    <p><input type="submit" value="Log in"></p>
+  </form:form>
+</div>
+
 
 </body>
 </html>
