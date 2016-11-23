@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ua.com.library.entity.User;
-import ua.com.library.service.AuthorService;
 import ua.com.library.service.UserService;
 
 @Controller
@@ -28,15 +27,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/saveUser", method = RequestMethod.POST)
-	public String saveUser(/*@RequestParam String username,
-			@RequestParam String email,
-			@RequestParam String pass,
-			@RequestParam String phone*/
-			@ModelAttribute User user,
-			@RequestParam String phone) {
+	public String saveUser(@ModelAttribute User user) {
 
-//		User user = new User(username, email, pass, phone);
-		user.setPhone(phone);
 		userService.save(user);
 		
 		return "redirect:/newUser";

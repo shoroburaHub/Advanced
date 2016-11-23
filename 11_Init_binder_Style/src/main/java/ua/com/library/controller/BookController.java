@@ -6,20 +6,42 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ua.com.library.editor.AuthorEditor;
+import ua.com.library.editor.CountryEditor;
+import ua.com.library.entity.Author;
 import ua.com.library.entity.Book;
+import ua.com.library.entity.Country;
+import ua.com.library.service.AuthorService;
 import ua.com.library.service.BookService;
+import ua.com.library.service.CountryService;
 
 @Controller
 public class BookController {
 
 	@Autowired
 	private BookService bookService;
+	
+	@Autowired
+	private CountryService countryService;
+	
+	@Autowired
+	private AuthorService authorService;
+	
+	@InitBinder
+	public void InitBinder(WebDataBinder binder){
+        binder.registerCustomEditor(Country.class,new CountryEditor(countryService));
+        binder.registerCustomEditor(Author.class, new AuthorEditor(authorService));
+    }
+	
+	
 	
 	@RequestMapping(value = "/newBook", method = RequestMethod.GET)
 	public String newBook(Model model) {
@@ -28,33 +50,22 @@ public class BookController {
 		
 		model.addAttribute("books", booksFromDB);
 		model.addAttribute("book", new Book());
-		
+		model.addAttribute("countries", countryService.findAll());
+		model.addAttribute("authors", authorService.findAll());
 		return "newBook";
 	}
 	
 	@RequestMapping(value = "/saveBook", method = RequestMethod.POST)
-	public String saveBook(/*@RequestParam String title,
-			@RequestParam int pages*/
-			
-			@ModelAttribute Book book,
+	public String saveBook(@ModelAttribute Book book,
 			@RequestParam String pages,
 			@RequestParam String date) {
 		
 		book.setPages(Integer.parseInt(pages));
 		
-		LocalDate localDate = LocalDate.parse(date);
-		
-		book.setDateofPublic(localDate);
+		book.setDateofPublic(LocalDate.parse(date));
 		
 		bookService.save(book);
-//		
-//		
-//		book.setDateofPublic(LocalDate.now());
-		
-//		Book book = new Book(title, pages);
-		
-//		bookService.save(new Book(title, pages));
-		
+
 		return "redirect:/newBook";
 	}	
 	
