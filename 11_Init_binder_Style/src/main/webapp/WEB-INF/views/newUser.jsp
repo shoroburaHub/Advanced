@@ -23,13 +23,6 @@
 	</c:forEach>
 
 
-	<%-- <sf:form modelAttribute="user" action="saveUser" method="post">
-	<sf:input path="username"/>
-	<sf:input path="email"/>
-	<sf:input path="password"/>
-	<sf:input path="phone"/>
-	<button>save user</button>
-</sf:form> --%>
 
 	<form:form modelAttribute="user" action="saveUser" method="post">
 		<div id="form-main">

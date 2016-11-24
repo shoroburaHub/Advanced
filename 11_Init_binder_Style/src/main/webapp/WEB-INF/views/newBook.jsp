@@ -25,20 +25,23 @@
 	</c:forEach>
 
 	<form:form modelAttribute="book" action="saveBook" method="post">
-		<form:input path="title" placeholder="title"/>
+		<form:input path="title" placeholder="title" />
 		<input name="pages" type="number" />
 		<input name="date" type="date">
 
 		<form:select path="country" items="${countries}" itemLabel="name"
 			itemValue="id">
 		</form:select>
-		
-		<form:select path="author" items="${authors}" itemLabel="surname"
-			itemValue="id">
+
+		<form:select path="author">
+			<c:forEach var="author" items="${authors}">
+				<form:option value="${author.id}">${author.surname}</form:option>
+			</c:forEach>
 		</form:select>
 
 		<button>save book</button>
 	</form:form>
+
 
 </body>
 </html>

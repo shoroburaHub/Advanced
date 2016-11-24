@@ -8,26 +8,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/home.css">
+<link rel="stylesheet" href="css/links.css">
 </head>
 <body>
 
-	<div>
-		<a href="newAuthor">add author</a>
+	<div style="display: none;">
+
+		<a href="newAuthor" id="link1">add author</a>
 		<br>
-		<a href="newBook">add book</a>
+		<a href="newBook" id="link2">add book</a>
 		<br>
-		<a href="newUser">add user</a>
+		<a href="newUser" id="link3">add user</a>
 		<br>
-		<a href="newCountry">add country</a>
+		<a href="newCountry" id="link4">add country</a>
 		<br>
-		<a href="newCity">add city</a>
+		<a href="newCity" id="link5">add city</a>
 		
 	</div>
 
-	<br>	
-	<br>	
-	<br>	
+		
 
 	<c:forEach var="book" items="${books}">
 		${book.title}
@@ -36,5 +35,6 @@
 
 
 
+<script src="js/links.js"></script>
 </body>
 </html>
