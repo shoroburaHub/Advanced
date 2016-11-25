@@ -19,7 +19,7 @@ public class HomeController {
 	@RequestMapping(value={"/","/home"}, method=RequestMethod.GET)
 	public String home(Model model){
 		model.addAttribute("books", DtoUtilMapper.booksToBooksDTO(bookService.findAll()));
-		return "home";
+		return "views-base-home";
 	}
 	
 }

@@ -22,7 +22,7 @@ public class AuthorController {
 	public String newAuthor(Model model) {
 		model.addAttribute("authors", authorService.findAuthorWithBooks());
 		model.addAttribute("author", new Author());
-		return "newAuthor";
+		return "views-admin-newAuthor";
 	}
 	
 	@RequestMapping(value = "/saveAuthor", method = RequestMethod.POST)
