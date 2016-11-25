@@ -15,9 +15,9 @@
 <body>
 
 
-	<c:forEach var="user" items="${users}">
+	<c:forEach var="userDTO" items="${userDTOs}">
 		<div style="background-color: aqua">
-			${user.name} ${user.email} <a href="deleteUser/${user.id}">delete</a>
+			${userDTO.name} ${userDTO.email} <a href="deleteUser/${userDTO.id}">delete</a>
 		</div>
 		<br>
 	</c:forEach>

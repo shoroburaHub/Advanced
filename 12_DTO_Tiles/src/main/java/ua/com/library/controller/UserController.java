@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ua.com.library.dto.DtoUtilMapper;
 import ua.com.library.entity.User;
 import ua.com.library.service.UserService;
 
@@ -21,9 +22,9 @@ public class UserController {
 	
 	@RequestMapping(value = "/newUser", method = RequestMethod.GET)
 	public String newUser(Model model) {
-		model.addAttribute("users", userService.findAll());
+		model.addAttribute("userDTOs", DtoUtilMapper.usersToUsersDTO(userService.findAll()));
 		model.addAttribute("user", new User());
-		return "newUser";
+		return "views-user-newUser";
 	}
 	
 	@RequestMapping(value = "/saveUser", method = RequestMethod.POST)

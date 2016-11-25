@@ -18,7 +18,7 @@
 
 	<c:forEach var="book" items="${books}">
 		<div style="background-color: grey">
-			${book.title} ${book.pages} ${book.dateofPublic} <a
+			${book.title} ${book.pages} <a
 				href="deleteBook/${book.id}">delete</a>
 		</div>
 		<br>
@@ -29,14 +29,12 @@
 		<input name="pages" type="number" />
 		<input name="date" type="date">
 
-		<form:select path="country" items="${countries}" itemLabel="name"
+		<form:select path="country" items="${countriesDTOs}" itemLabel="name"
 			itemValue="id">
 		</form:select>
 
-		<form:select path="author">
-			<c:forEach var="author" items="${authors}">
-				<form:option value="${author.id}">${author.surname}</form:option>
-			</c:forEach>
+		<form:select path="author" items="${authorsDTOs}" itemLabel="surname"
+			itemValue="id">
 		</form:select>
 
 		<button>save book</button>
