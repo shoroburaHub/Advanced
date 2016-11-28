@@ -1,6 +1,5 @@
 package ua.com.library.controller;
 
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,13 +21,11 @@ public class CountryController {
 	public String saveCountry(Model model) {
 		model.addAttribute("countries", countryService.findAll());
 		model.addAttribute("country", new Country());
-		return "newCountry";
+		return "views-admin-newCountry";
 	}
 	
 	@RequestMapping(value = "/newCountry", method = RequestMethod.POST)
 	public String saveCountry(@ModelAttribute Country country) {
-		
-		Hibernate.initialize(country.getCities());
 		
 		countryService.save(country);
 		

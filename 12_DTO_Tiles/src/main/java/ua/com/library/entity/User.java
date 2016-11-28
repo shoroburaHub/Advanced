@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OrderBy;
 
 @Entity
 public class User {
@@ -20,7 +21,7 @@ public class User {
 	private String email;
 	private String password;
 	private String phone;
-
+	
 	@ManyToMany
 	@JoinTable(name = "user_book", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "book_id"))
 	private List<Book> books;

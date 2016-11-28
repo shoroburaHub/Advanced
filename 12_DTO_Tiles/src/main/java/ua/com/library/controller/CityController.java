@@ -1,7 +1,5 @@
 package ua.com.library.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import ua.com.library.editor.CountryEditor;
-import ua.com.library.entity.Book;
 import ua.com.library.entity.City;
 import ua.com.library.entity.Country;
 import ua.com.library.service.CityService;
@@ -25,32 +22,26 @@ public class CityController {
 	private CityService cityService;
 	@Autowired
 	private CountryService countryService;
-	
+
 	@InitBinder
-	protected void initBinder(WebDataBinder binder){
+	protected void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(Country.class, new CountryEditor(countryService));
 	}
-	
-	
-	
-	
+
 	@RequestMapping(value = "/newCity", method = RequestMethod.GET)
 	public String newCity(Model model) {
-		
+
 		model.addAttribute("city", new City());
 		model.addAttribute("countries", countryService.findAll());
-		return "newCity";
+		return "views-admin-newCity";
 	}
-	
+
 	@RequestMapping(value = "/saveCity", method = RequestMethod.POST)
 	public String saveCity(@ModelAttribute City city) {
-		
+
 		cityService.save(city);
-		
+
 		return "redirect:/newCity";
 	}
-	
-	
-	
-	
+
 }

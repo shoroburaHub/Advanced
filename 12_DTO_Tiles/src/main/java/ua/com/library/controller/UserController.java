@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import ua.com.library.dto.DtoUtilMapper;
 import ua.com.library.entity.User;
@@ -29,7 +28,6 @@ public class UserController {
 	
 	@RequestMapping(value = "/saveUser", method = RequestMethod.POST)
 	public String saveUser(@ModelAttribute User user) {
-
 		userService.save(user);
 		
 		return "redirect:/newUser";
@@ -42,9 +40,5 @@ public class UserController {
 		
 		return "redirect:/newUser";
 	}
-	
-	
-	
-	
 	
 }
