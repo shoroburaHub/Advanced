@@ -22,9 +22,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	private UserDao userDao;
 	
 	@Autowired
-    private BCryptPasswordEncoder encoder;
+    	private BCryptPasswordEncoder encoder;
 	
-	@Transactional
 	public void save(User user) {
 		user.setRole(Role.ROLE_USER);
 		user.setPassword(encoder.encode(user.getPassword()));
