@@ -30,8 +30,4 @@
 
 	<mvc:resources mapping="/js/**" location="/js/" />
 
-
-
-
-
 </beans>

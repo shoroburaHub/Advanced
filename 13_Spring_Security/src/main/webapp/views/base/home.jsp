@@ -3,44 +3,36 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
+	
 <sec:authentication property="name" />
 
+<sec:authorize access="isAuthenticated()">
 
-<form:form action="logout" method="post">
-	<button>logout</button>
-</form:form>
+	<form:form action="logout" method="post">
+		<button>logout</button>
+	</form:form>
+</sec:authorize>
 
-
-<br>
-<a href="loginpage">login</a>
-<br>
-<a href="registration" id="link3">registration</a>
-<br>
-
-
-
-
-<a href="admin">admin page</a>
+<sec:authorize access="!isAuthenticated()">
+	<br>
+	<a href="loginpage">login</a>
+	<br>
+	<a href="registration">registration</a>
+	<br>
+</sec:authorize>
 
 
+<sec:authorize access="hasRole('ROLE_ADMIN')">
 
+	<a href="admin">admin page</a>
 
+</sec:authorize>
 
-
-
-
-<%-- <form:form modelAttribute="user" action="addBookToUser" method="post">
-	<form:input path="name"/>
-	<form:input path="email"/>
-	<form:input path="password"/>
-	<form:select path="books" items="${books}" itemLabel="title" itemValue="id">
-	</form:select>
-	<button>save</button>
-</form:form> --%>
-
-
-
+<sec:authorize access="isAuthenticated()">
+	<a href="profile">profile</a>
+</sec:authorize>
 
 <br>
 <br>
@@ -48,6 +40,9 @@
 
 
 <c:forEach var="book" items="${books}">
-		${book.title} ${book.pages}
-		<br>
+		${book.title} ${book.pages} 
+			<sec:authorize access="isAuthenticated()">
+				<a href="buyBook/${book.id}">buy</a>
+			</sec:authorize>
+	<br>
 </c:forEach>

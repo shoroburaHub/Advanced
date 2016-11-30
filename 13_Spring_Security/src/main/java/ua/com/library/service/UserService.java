@@ -1,6 +1,9 @@
 package ua.com.library.service;
 
+import java.security.Principal;
 import java.util.List;
+
+import org.springframework.data.repository.query.Param;
 
 import ua.com.library.entity.User;
 
@@ -11,5 +14,8 @@ public interface UserService {
 	User findOne(int id);
 	void delete(int id);
 	
-	User findByName(String name);
+	void buyBook(Principal principal, String id);
+	
+	User fetchUserWithBook(int id);
+	
 }

@@ -19,6 +19,9 @@
 	</c:forEach>
 
 
+	
+
+
 
 	<form:form modelAttribute="user" action="saveUser" method="post">
 		<div id="form-main">
