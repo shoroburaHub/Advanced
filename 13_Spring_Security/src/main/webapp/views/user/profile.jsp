@@ -6,6 +6,7 @@
 
 ${user.name} ${user.email} ${user.phone}
 <br>
+
 <br>
 
 <c:forEach var="book" items="${user.books}">
