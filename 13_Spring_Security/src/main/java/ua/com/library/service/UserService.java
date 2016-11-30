@@ -18,4 +18,6 @@ public interface UserService {
 	
 	User fetchUserWithBook(int id);
 	
+	void deleteBookFromUser(Principal principal, int id);
+	
 }

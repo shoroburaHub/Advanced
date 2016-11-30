@@ -11,5 +11,6 @@ ${user.name} ${user.email} ${user.phone}
 
 <c:forEach var="book" items="${user.books}">
 	${book.title} ${book.pages}
+	<a href="deleteBookFromUser/${book.id}">delete</a>
 <br>
 </c:forEach> 

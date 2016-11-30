@@ -1,5 +1,6 @@
 package ua.com.library.serviceImpl;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ua.com.library.dao.BookDao;
 import ua.com.library.dao.UserDao;
+import ua.com.library.entity.Book;
 import ua.com.library.entity.Role;
 import ua.com.library.entity.User;
 import ua.com.library.service.UserService;
@@ -22,7 +25,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	private UserDao userDao;
 	
 	@Autowired
-    	private BCryptPasswordEncoder encoder;
+	private BookDao bookDao;
+	
+	@Autowired
+    private BCryptPasswordEncoder encoder;
 	
 	public void save(User user) {
 		user.setRole(Role.ROLE_USER);
@@ -49,6 +55,37 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	public User findByName(String name) {
 		return userDao.findByName(name);
 	}
+
+	@Transactional
+	public void buyBook(Principal principal, String id) {
+		
+		User user = 
+				userDao.findOne(Integer.parseInt(principal.getName()));
+		
+		Book book = bookDao.findOne(Integer.parseInt(id));
+		
+//		user.getBooks().add(book);
+		book.getUsers().add(user);
+		
+		
+	}
+
+	public User fetchUserWithBook(int id) {
+		return userDao.fetchUserWithBook(id);
+	}
+
+	@Transactional
+	public void deleteBookFromUser(Principal principal, int id) {
+		
+		User user = userDao.findOne(Integer.parseInt(principal.getName()));
+		
+		user.getBooks().remove(bookDao.findOne(id));
+		
+		
+		
+	}
+	
+	
 
 
 	

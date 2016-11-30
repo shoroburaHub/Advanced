@@ -30,8 +30,8 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/home", method = RequestMethod.POST)
-	public String loginprocesing() {
-		return "redirect:/home";
+	public String anton() {
+		return "redirect:/";
 	}
 
 	@RequestMapping("/loginpage")

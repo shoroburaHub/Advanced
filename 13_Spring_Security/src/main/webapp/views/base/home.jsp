@@ -41,7 +41,7 @@
 
 <c:forEach var="book" items="${books}">
 		${book.title} ${book.pages} 
-			<sec:authorize access="isAuthenticated()">
+			<sec:authorize access="hasAnyRole('ROLE_USER')">
 				<a href="buyBook/${book.id}">buy</a>
 			</sec:authorize>
 	<br>

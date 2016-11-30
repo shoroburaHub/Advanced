@@ -46,8 +46,6 @@ public class UserController {
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public String profile(Principal principal, Model model) {
 
-		System.out.println(principal);
-
 		User user = userService.fetchUserWithBook(Integer.parseInt(principal.getName()));
 
 		model.addAttribute("user", user);
@@ -57,11 +55,33 @@ public class UserController {
 
 	@RequestMapping(value = "/buyBook/{id}", method = RequestMethod.GET)
 	public String buyBook(Principal principal, @PathVariable String id) {
-
 		
 		userService.buyBook(principal, id);
 
 		return "redirect:/";
 	}
+	
+	
+	@RequestMapping(value = "/deleteBookFromUser/{id}", method = RequestMethod.GET)
+	public String deleteBookFromUser(Principal principal, @PathVariable String id) {
+		
+		userService.deleteBookFromUser(principal, Integer.parseInt(id));
+
+		return "redirect:/profile";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
