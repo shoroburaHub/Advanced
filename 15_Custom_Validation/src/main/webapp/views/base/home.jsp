@@ -6,6 +6,9 @@
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
 	
+	<a href="some">some</a>
+	
+	
 <sec:authentication property="name" />
 
 <sec:authorize access="isAuthenticated()">
@@ -30,10 +33,9 @@
 
 </sec:authorize>
 
-<sec:authorize access="hasRole('ROLE_USER')">
+<sec:authorize access="isAuthenticated()">
 	<a href="profile">profile</a>
 </sec:authorize>
-
 
 <br>
 <br>
@@ -42,7 +44,7 @@
 
 <c:forEach var="book" items="${books}">
 		${book.title} ${book.pages} 
-			<sec:authorize access="hasAnyRole('ROLE_USER')">
+			<sec:authorize access="isAuthenticated()">
 				<a href="buyBook/${book.id}">buy</a>
 			</sec:authorize>
 	<br>

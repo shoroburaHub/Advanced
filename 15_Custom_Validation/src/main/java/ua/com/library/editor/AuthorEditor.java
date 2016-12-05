@@ -5,7 +5,7 @@ import java.beans.PropertyEditorSupport;
 import ua.com.library.service.AuthorService;
 
 public class AuthorEditor extends PropertyEditorSupport{
-
+	
 	private final AuthorService authorService;
 
 	public AuthorEditor(AuthorService authorService) {

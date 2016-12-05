@@ -113,7 +113,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         } catch (IOException e) {
             System.out.println("error with file");
         }
-        userDao.save(user);
     }
 
 
