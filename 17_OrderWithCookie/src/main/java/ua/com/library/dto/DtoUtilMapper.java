@@ -3,10 +3,7 @@ package ua.com.library.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.library.entity.Author;
-import ua.com.library.entity.Book;
-import ua.com.library.entity.Country;
-import ua.com.library.entity.User;
+import ua.com.library.entity.*;
 
 public class DtoUtilMapper {
 
@@ -70,9 +67,18 @@ public class DtoUtilMapper {
 		}
 		return countryDTOs;
 	}
-	
-	
-	
-	
+
+	public static List<CityDTO> cityToCityDTO(List<City> cities){
+
+		List<CityDTO> cityDTOs = new ArrayList<>();
+
+		for (City city : cities) {
+			cityDTOs.add(new CityDTO(city.getName()));
+		}
+
+		return cityDTOs;
+
+	}
+
 
 }

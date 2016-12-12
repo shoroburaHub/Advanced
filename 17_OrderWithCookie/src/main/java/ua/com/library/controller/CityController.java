@@ -4,44 +4,48 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
+import ua.com.library.dto.CityDTO;
+import ua.com.library.dto.DtoUtilMapper;
 import ua.com.library.editor.CountryEditor;
 import ua.com.library.entity.City;
 import ua.com.library.entity.Country;
 import ua.com.library.service.CityService;
 import ua.com.library.service.CountryService;
 
+import java.util.List;
+
 @Controller
 public class CityController {
 
-	@Autowired
-	private CityService cityService;
-	@Autowired
-	private CountryService countryService;
+    @Autowired
+    private CityService cityService;
+    @Autowired
+    private CountryService countryService;
 
-	@InitBinder
-	protected void initBinder(WebDataBinder binder) {
-		binder.registerCustomEditor(Country.class, new CountryEditor(countryService));
-	}
+    @RequestMapping(value = "/newCity", method = RequestMethod.GET)
+    public String newCity(Model model) {
+        model.addAttribute("countries", DtoUtilMapper.countriesToCountriesDTOs(countryService.findAll()));
+        return "views-admin-newCity";
+    }
 
-	@RequestMapping(value = "/newCity", method = RequestMethod.GET)
-	public String newCity(Model model) {
+    @RequestMapping(value = "/saveCity", method = RequestMethod.POST)
+    public @ResponseBody boolean saveCity(@RequestBody City city) {
 
-		model.addAttribute("city", new City());
-		model.addAttribute("countries", countryService.findAll());
-		return "views-admin-newCity";
-	}
 
-	@RequestMapping(value = "/saveCity", method = RequestMethod.POST)
-	public String saveCity(@ModelAttribute City city) {
+        cityService.save(city);
 
-		cityService.save(city);
+        return true;
+    }
 
-		return "redirect:/newCity";
-	}
+    @RequestMapping(value = "/loadCity", method = RequestMethod.POST)
+    public @ResponseBody List<CityDTO> saveCity() {
+
+
+       return DtoUtilMapper.cityToCityDTO(cityService.findAll());
+
+    }
+
 
 }

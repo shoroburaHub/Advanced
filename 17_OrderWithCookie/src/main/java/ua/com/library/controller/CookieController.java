@@ -30,24 +30,14 @@ public class CookieController {
 
 		userService.intoBasket(Integer.parseInt(id), request, response);
 
-		// userService.buyBook(principal, id);
-
 		return "redirect:/";
 	}
 
-	@RequestMapping(value = "/profile", method = RequestMethod.GET)
-	public String profile(HttpServletRequest request, Principal principal, Model model) {
 
-		User user = userService.findOne(Integer.parseInt(principal.getName()));
-
-		model.addAttribute("user", user);
-		model.addAttribute("books", userService.userBooksCookie(request));
-
-		return "views-user-profile";
-	}
 
 	@RequestMapping(value = "/getOrder/{id}", method = RequestMethod.GET)
-	public String getOrder(Principal principal, @PathVariable String id, HttpServletRequest request,
+	public String getOrder(Principal principal, @PathVariable String id, 
+			HttpServletRequest request,
 			HttpServletResponse response) {
 
 		userService.getOrder(principal, id, request, response);
@@ -62,8 +52,17 @@ public class CookieController {
 
         userService.deleteCookieFromOrder(id, request, response);
 
-        return "redirect:/profile";
+        return "redirect:/basket";
     }
+
+
+    @RequestMapping(value = "/basket", method = RequestMethod.GET)
+	public String basket(HttpServletRequest request, Model model){
+
+		model.addAttribute("books", userService.userBooksCookie(request));
+
+		return "views-base-basket";
+	}
 
 
 

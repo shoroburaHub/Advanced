@@ -1,5 +1,7 @@
 package ua.com.library.dto;
 
+import java.util.function.Function;
+
 public class UserDTO {
 
 	private int id;
@@ -38,7 +40,6 @@ public class UserDTO {
 	public String toString() {
 		return "UserDTO [id=" + id + ", name=" + name + ", email=" + email + "]";
 	}
-	
-	
-	
+
+
 }

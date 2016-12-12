@@ -14,4 +14,6 @@ public interface CountryService {
 
 	void delete(int id);
 
+	Country findCountryWithCities(int id);
+
 }

@@ -35,6 +35,8 @@ public interface UserService {
 
     void update(User user);
 
+    void updateProfile(User user);
+
 
     
     // for cookie

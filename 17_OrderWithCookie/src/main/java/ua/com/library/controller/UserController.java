@@ -11,6 +11,7 @@ import ua.com.library.service.MailSenderService;
 import ua.com.library.service.UserService;
 import ua.com.library.validator.UserValidationMessages;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.UUID;
 
@@ -48,6 +49,16 @@ public class UserController {
         userService.saveImage(principal, image);
 
         return "redirect:/profile";
+    }
+
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String profile(HttpServletRequest request, Principal principal, Model model) {
+
+        User user = userService.fetchUserWithBook(Integer.parseInt(principal.getName()));
+
+        model.addAttribute("user", user);
+
+        return "views-user-profile";
     }
 
 
@@ -95,6 +106,32 @@ public class UserController {
 
         return "redirect:/";
     }
+
+    @RequestMapping(value = "/updateProfile", method = RequestMethod.GET)
+    public String updateProfile(Principal principal, Model model){
+        User user = userService.findOne(Integer.parseInt(principal.getName()));
+        model.addAttribute("user", user);
+        return "views-user-updateProfile";
+    }
+
+    @RequestMapping(value = "/updateProfile", method = RequestMethod.POST)
+    public String updateProfile(Principal principal, @RequestParam String name,
+                                @RequestParam String email,
+                                @RequestParam String phone,
+                                @RequestParam String password){
+        User user = userService.findOne(Integer.parseInt(principal.getName()));
+
+        user.setName(name);
+        user.setEmail(email);
+        user.setPhone(phone);
+        user.setPassword(password);
+
+        userService.updateProfile(user);
+
+        return "redirect:/profile";
+    }
+
+
 
 
 }

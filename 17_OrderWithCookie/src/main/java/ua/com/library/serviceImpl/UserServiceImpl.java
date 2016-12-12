@@ -119,12 +119,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		userDao.save(user);
 	}
 
-	public Cookie intoBasket(int id, HttpServletRequest request, HttpServletResponse response) {
+	public Cookie intoBasket(int id, HttpServletRequest request,
+							 HttpServletResponse response) {
 
 		request.getSession(false);
 		Book book = bookDao.findOne(id);
 
-		Cookie cookieBook = new Cookie(book.getTitle(), String.valueOf(book.getId()));
+		Cookie cookieBook =
+				new Cookie(book.getTitle(), String.valueOf(book.getId()));
 		cookieBook.setMaxAge(24 * 60 * 60 * 60);
 		cookieBook.setHttpOnly(true);
 		cookieBook.setPath("/");
@@ -167,7 +169,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		
 
 	@Override
-	public void deleteCookieFromOrder(String id, HttpServletRequest request, HttpServletResponse response) {
+	public void deleteCookieFromOrder(String id, HttpServletRequest request, 
+			HttpServletResponse response) {
 		
 		Cookie[] cookies = request.getCookies();
         sortCookie(cookies, id, response);
@@ -178,23 +181,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         for (int i = 0; i < cookies.length; i++) {
             if (id.equals(cookies[i].getValue())) {
                 Cookie cookie = new Cookie(cookies[i].getName(), null);
-                cookie.setPath("/");
-                cookie.setValue(null);
-                cookie.setHttpOnly(true);
+				cookie.setHttpOnly(true);
+				cookie.setPath("/");
+				cookie.setValue(null);
                 cookie.setMaxAge(0);
                 response.addCookie(cookie);
             }
         }
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	@Override
+	public void updateProfile(User user) {
+		user.setPassword(encoder.encode(user.getPassword()));
+		userDao.save(user);
+	}
 }

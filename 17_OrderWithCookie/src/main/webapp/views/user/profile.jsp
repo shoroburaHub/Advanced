@@ -3,11 +3,12 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
+<a href="updateProfile">update profile</a>
+<br>
 
 ${user.name} ${user.email} ${user.phone}
 <br>
-<img src="${user.pathImage}" alt="add foto" width="500px" height="500px">
+<img src="${user.pathImage}" alt="add foto">
 <br>
 
 <form:form action="./saveImage?${_csrf.parameterName}=${_csrf.token}"
@@ -17,9 +18,7 @@ ${user.name} ${user.email} ${user.phone}
 </form:form>
 <br>
 
-<c:forEach var="book" items="${books}">
+<c:forEach var="book" items="${user.books}">
     ${book.title} ${book.pages}
-    <a href="deleteFromOrder/${book.id}">delete</a>
-    <a href="getOrder/${book.id}">get order</a>
     <br>
 </c:forEach>

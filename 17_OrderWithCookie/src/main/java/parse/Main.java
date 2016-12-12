@@ -5,6 +5,8 @@ import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import ua.com.library.dto.UserDTO;
+import ua.com.library.entity.User;
 
 public class Main {
 
@@ -12,29 +14,23 @@ public class Main {
 		
 		
 		parse();
-		
+
+		User user = new User("koko", "koko", "koko", "koko");
+
 	}
 	
 	public static void parse() throws IOException{
 		
-		Document document = Jsoup.connect("http://www.shopbookshop.com/collections/books").get();
-		
+		Document document =
+				Jsoup.connect("http://www.shopbookshop.com/collections/books").get();
 
-		String [] text = new String[document.select("span.grid-product__wrapper").size()];
-		
-		System.out.println(document.select("span.grid-product__price").text().replace("$ ", ""));
-		
-		
-//		int i = 1;
-//		for(Element s : document.select("span.grid-product__wrapper")){
-//			System.out.println(s.text());
-////			text[i] = s.text().split("$ ")[i];
-//			i++;
-//		}
-//		
-//		for (String string : text) {
-//			System.out.println(string);
-//		}
+
+		for (Element element : document.select("span.grid-product__title")) {
+			System.out.println(element.text());
+		}
+
+		System.out.println(document.select("span.grid-product__price")
+				.text().replace("$ ", ""));
 		
 	}
 	
