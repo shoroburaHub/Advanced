@@ -27,8 +27,8 @@ public class UserController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String newUser(Model model) {
-        model.addAttribute("userDTOs", DtoUtilMapper.usersToUsersDTO(userService.findAll()));
-        model.addAttribute("user", new User());
+//        model.addAttribute("userDTOs", DtoUtilMapper.usersToUsersDTO(userService.findAll()));
+
         return "views-user-registration";
     }
 

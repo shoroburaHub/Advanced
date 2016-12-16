@@ -14,7 +14,7 @@
 /* The actual popup */
 .popup .popuptext {
     visibility: hidden;
-    width: 160px;
+    width: 300px;
     background-color: grey;
     color: #fff;
     text-align: center;
@@ -22,7 +22,7 @@
     padding: 8px 0;
     position: absolute;
     z-index: 1;
-    bottom: -400%;
+    bottom: -800%;
     left: 50%;
     margin-left: -80px;
 }

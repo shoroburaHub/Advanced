@@ -11,7 +11,7 @@
         <input name="username" type="text" id="user" placeholder="Username">
 
         <span class="fontawesome-lock"></span>
-        <input name="j_spring_security_password" type="password" id="pass" placeholder="Password">
+        <input name="password" type="password" id="pass" placeholder="Password">
 
         <input type="submit" value="Login">
 

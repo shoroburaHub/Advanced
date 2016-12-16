@@ -15,7 +15,6 @@ public class Main {
 		
 		parse();
 
-		User user = new User("koko", "koko", "koko", "koko");
 
 	}
 	

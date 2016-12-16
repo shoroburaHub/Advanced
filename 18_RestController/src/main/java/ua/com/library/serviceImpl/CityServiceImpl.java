@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import ua.com.library.dao.CityDao;
 import ua.com.library.entity.City;
+import ua.com.library.entity.Country;
 import ua.com.library.service.CityService;
 @Service
 public class CityServiceImpl implements CityService{
@@ -29,7 +30,9 @@ public class CityServiceImpl implements CityService{
 	public void delete(int id) {
 		cityDao.delete(id);
 	}
-	
-	
-	
+
+
+	public Country getAllCitiesByCountryId(int id) {
+		return cityDao.getAllCitiesByCountryId(id);
+	}
 }

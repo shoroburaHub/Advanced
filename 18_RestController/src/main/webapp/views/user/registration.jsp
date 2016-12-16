@@ -1,61 +1,68 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-<link rel="stylesheet" href="css/login.css">
 
 
-	<form:form modelAttribute="user" action="registration" method="post">
-		<div id="form-main">
-			<div id="form-div">
-				<form class="form" id="form1">
+<input type="text" id="name">
+<input type="text" id="email">
+<input type="text" id="phone">
+<input type="password" id="password">
 
-					<p class="name">
-						<div style="text-align: center; color: red; margin: 5px">
-							<label for="name">${usernameException}</label>
-						</div>
-						<form:input path="name" type="text"
-							class="validate[required,custom[onlyLetter],length[0,100]] feedback-input"
-							placeholder="Name" id="name"/>
-					</p>
+<button id="signUp">sign up</button>
 
-					<p class="email">
-						<div style="text-align: center; color: red; margin: 5px">
-							<label for="email">${emailException}</label>
-						</div>
-						<form:input path="email" type="text"
-							class="validate[required,custom[email]] feedback-input"
-							id="email" placeholder="Email" />
-					</p>
+<input type="hidden" name="csrf_name"
+	   value="${_csrf.parameterName}" />
+<input type="hidden" name="csrf_value"
+	   value="${_csrf.token}" />
 
-					<p class="password">
-						<div style="text-align: center; color: red; margin: 5px">
-							<label for="password">${passwordException}</label>
-						</div>
-						<form:input path="password" type="text"
-							class="validate[required,custom[email]] feedback-input"
-							id="password" placeholder="password" />
-					</p>
+<div id="allUser">asidufjasdo</div>
 
-					<p class="phone">
-						<div style="text-align: center; color: red; margin: 5px">
-							<label for="phone">${phoneException}</label>
-						</div>
-						<form:input path="phone" type="text"
-							class="validate[required,custom[password]] feedback-input"
-							id="phone" placeholder="phone" />
-					</p>
 
-					<div class="submit">
-						<input type="submit" value="SEND" id="button-blue" />
-						<div class="ease"></div>
-					</div>
-					
-				</form>
-			</div>
-	</form:form>
+
+<script>
+
+	document.getElementById('signUp').onclick = function () {
+
+		var user = {
+
+			name : 	$('#name').val(),
+			email : document.getElementById('email').value,
+			phone : document.getElementById('phone').value,
+			password : document.getElementById('password').value
+
+		}
+
+		$.ajax({
+
+			url: 'saveUser?' + $('input[name=csrf_name]').val() + "=" + $('input[name=csrf_value]').val(),
+			method: 'POST',
+			contentType: 'application/json; charset=UTF-8',
+			dataType: 'json',
+			data: JSON.stringify(user),
+			success : function (res) {
+
+				var all = '';
+
+				for(var i = 0; i < res.length; i++){
+					all+= '<div>'+res[i].name+''+res[i].email+''+res[i].phone+'</div><br>';
+				}
+
+
+				document.getElementById('allUser').innerHTML = all;
+
+
+
+			}
+
+
+		})
+
+
+
+
+
+	}
+
+
+</script>

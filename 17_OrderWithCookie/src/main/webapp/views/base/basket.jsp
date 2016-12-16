@@ -12,20 +12,27 @@
 <head>
     <title>basket</title>
     <link rel="stylesheet" href="/css/popup.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/js/jquery-3.1.1.min.js"></script>
 </head>
 <body>
 
+
+<input type="hidden" name="csrf_name"
+       value="${_csrf.parameterName}"/>
+<input type="hidden" name="csrf_value"
+       value="${_csrf.token}"/>
+
 <c:forEach var="book" items="${books}">
-    ${book.title}
+    ${book.title} ${book.pages}
     <a href="deleteFromOrder/${book.id}">delete From Cookie</a>
-    <div class="popup" onclick="myFunction()">get order
+    <div class="popup" onclick="myFunction(${book.id})">get order
         <div class="popuptext" id="myPopup">
-            <a href="registration">registration</a>
-            <sec:authorize access="isAuthenticated()">
-                <br>
-                <a href="loginpage">login</a>
-            </sec:authorize>
+
+            <input type="text" id="titleBook">
+            <br>
+            <input type="text" id="bookPages">
+            <button id="saveUpdate">save update</button>
+
         </div>
     </div>
     <br>

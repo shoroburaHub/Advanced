@@ -4,21 +4,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
+import ua.com.library.dto.CityDTO;
+import ua.com.library.dto.DtoUtilMapper;
 import ua.com.library.editor.BookEditor;
 import ua.com.library.entity.Book;
 import ua.com.library.service.BookService;
+import ua.com.library.service.CityService;
+import ua.com.library.service.CountryService;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class HomeController {
 
 	@Autowired
 	private BookService bookService;
+	@Autowired
+	private CountryService countryService;
+	@Autowired
+	private CityService cityService;
 
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
@@ -27,7 +34,7 @@ public class HomeController {
 
 	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
 	public String home(Model model, Principal principal) {
-		model.addAttribute("books", bookService.findAll());
+		model.addAttribute("countries", DtoUtilMapper.countriesToCountriesDTOs(countryService.findAll()));
 		return "views-base-home";
 	}
 
@@ -52,5 +59,33 @@ public class HomeController {
 
 		return "redirect:/HTMLpages/some.html";
 	}
+
+	@RequestMapping(value = "/getBooks", method = RequestMethod.POST)
+	public void getBooks(@RequestBody String [] arr, Principal principal){
+
+		for (String s : arr) {
+			System.out.println(s);
+		}
+
+	}
+
+
+	@RequestMapping(value = "/getCities", method = RequestMethod.POST)
+	public @ResponseBody List<CityDTO>	getBooks(@RequestBody String id){
+
+		System.out.println(countryService.findCountryWithCities(Integer.parseInt(id)));;
+		System.out.println(DtoUtilMapper.cityToCityDTO(cityService.getAllCitiesByCountryId(Integer.parseInt(id)).getCities()));
+
+		return DtoUtilMapper.cityToCityDTO(cityService.getAllCitiesByCountryId(Integer.parseInt(id)).getCities());
+
+
+	}
+
+
+
+
+
+
+
 
 }

@@ -14,9 +14,9 @@ public class DtoUtilMapper {
 		for (User user : users) {
 
 			UserDTO userDTO = new UserDTO();
-			userDTO.setId(user.getId());
 			userDTO.setName(user.getName());
 			userDTO.setEmail(user.getEmail());
+			userDTO.setName(user.getPhone());
 
 			userDTOs.add(userDTO);
 
@@ -73,7 +73,8 @@ public class DtoUtilMapper {
 		List<CityDTO> cityDTOs = new ArrayList<>();
 
 		for (City city : cities) {
-			cityDTOs.add(new CityDTO(city.getName()));
+
+			cityDTOs.add(new CityDTO( city.getId(),city.getName()));
 		}
 
 		return cityDTOs;
