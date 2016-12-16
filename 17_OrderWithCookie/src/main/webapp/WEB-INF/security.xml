@@ -11,6 +11,7 @@
         authentication-success-forward-url="/home"/>
 
         <security:intercept-url pattern="/" access="permitAll()"/>
+        <security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
 
         <security:logout logout-url="/logout" logout-success-url="/"/>
         

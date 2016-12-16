@@ -31,4 +31,8 @@ public class BookServiceImpl implements BookService{
 		bookDao.delete(id);
 	}
 
+	@Override
+	public List<Book> sortBooks(int value) {
+		return bookDao.sortBooks(value);
+	}
 }

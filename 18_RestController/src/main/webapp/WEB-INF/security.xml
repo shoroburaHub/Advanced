@@ -8,8 +8,6 @@
 
     <security:http use-expressions="true" auto-config="true">
 
-
-
         <security:form-login login-page="/loginpage" login-processing-url="/loginprocesing" 
         authentication-success-forward-url="/home"/>
 
