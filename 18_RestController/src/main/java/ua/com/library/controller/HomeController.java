@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import ua.com.library.dto.BookDTO;
 import ua.com.library.dto.CityDTO;
 import ua.com.library.dto.DtoUtilMapper;
 import ua.com.library.editor.BookEditor;
@@ -15,6 +16,7 @@ import ua.com.library.service.CityService;
 import ua.com.library.service.CountryService;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -34,7 +36,7 @@ public class HomeController {
 
 	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
 	public String home(Model model, Principal principal) {
-		model.addAttribute("countries", DtoUtilMapper.countriesToCountriesDTOs(countryService.findAll()));
+		model.addAttribute("books", DtoUtilMapper.booksToBooksDTO(bookService.findAll()));
 		return "views-base-home";
 	}
 
@@ -80,6 +82,33 @@ public class HomeController {
 
 
 	}
+
+	@RequestMapping(value = "/sortBooks", method = RequestMethod.POST)
+	public @ResponseBody List<BookDTO>	sortBooks(@RequestBody String index){
+
+
+		List<Book> bookList = bookService.sortBooks(Integer.parseInt(index));
+
+		return DtoUtilMapper.booksToBooksDTO(bookList);
+
+
+	}
+
+	@RequestMapping(value = "/liveSearchBooks", method = RequestMethod.POST)
+	public @ResponseBody List<BookDTO> liveSearchBooks(@RequestBody String search){
+
+		System.out.println(search);
+
+		System.out.println(bookService.liveSearch(search));
+		for (Book book : bookService.liveSearch(search)) {
+			System.out.println(book);
+		}
+
+		List<Book> bookList = bookService.liveSearch(search);
+
+		return DtoUtilMapper.booksToBooksDTO(bookList);
+	}
+
 
 
 

@@ -1,6 +1,7 @@
 package ua.com.library.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ public class UserController {
 
 
     @Autowired
+    @Qualifier("userDetailsService")
     private UserService userService;
 
     @Autowired
@@ -31,6 +33,7 @@ public class UserController {
 
         return "views-user-registration";
     }
+
 
     @RequestMapping(value = "/deleteUser/{id}", method = RequestMethod.GET)
     public String newUser(@PathVariable int id) {
@@ -131,6 +134,16 @@ public class UserController {
         return "redirect:/profile";
     }
 
+
+
+    @RequestMapping(value = "joinUserWhithBook/{idBook}", method = RequestMethod.PUT)
+    public String join(Principal principal, @PathVariable String idBook){
+
+        userService.join(Integer.parseInt(principal.getName()),Integer.parseInt(idBook));
+
+
+        return null;
+    }
 
 
 

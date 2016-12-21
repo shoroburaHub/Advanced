@@ -10,6 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.beanutils.converters.IntegerConverter;
 import org.apache.commons.io.FileUtils;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,166 +34,213 @@ import ua.com.library.validator.Validator;
 @Service("userDetailsService")
 public class UserServiceImpl implements UserService, UserDetailsService {
 
-	@Autowired
-	private UserDao userDao;
-	@Autowired
-	private BookDao bookDao;
+    @Autowired
+    private UserDao userDao;
+    @Autowired
+    private BookDao bookDao;
 
-	@Autowired
-	@Qualifier("userValidator")
-	private Validator validator;
+    @Autowired
+    @Qualifier("userValidator")
+    private Validator validator;
 
-	@Autowired
-	private BCryptPasswordEncoder encoder;
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
-	public void save(User user) throws Exception {
+    public void save(User user) throws Exception {
 
-		validator.validate(user);
+        validator.validate(user);
 
-		user.setRole(Role.ROLE_USER);
-		user.setPassword(encoder.encode(user.getPassword()));
-		userDao.save(user);
+//		user.setRole(Role.ROLE_USER);
+        user.setPassword(encoder.encode(user.getPassword()));
+        userDao.save(user);
 
-	}
+    }
 
-	public List<User> findAll() {
-		return userDao.findAll();
-	}
+    public List<User> findAll() {
+        return userDao.findAll();
+    }
 
-	public User findOne(int id) {
-		return userDao.findOne(id);
-	}
+    public User findOne(int id) {
+        return userDao.findOne(id);
+    }
 
-	public void delete(int id) {
-		userDao.delete(id);
-	}
+    public void delete(int id) {
+        userDao.delete(id);
+    }
 
-	public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-		return userDao.findByName(name);
-	}
+    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+        return userDao.findByName(name);
+    }
 
-	@Transactional
-	public void buyBook(Principal principal, String id) {
-		User user = userDao.findOne(Integer.parseInt(principal.getName()));
+    @Transactional
+    public void buyBook(Principal principal, String id) {
+        User user = userDao.findOne(Integer.parseInt(principal.getName()));
 
-		Book book = bookDao.findOne(Integer.parseInt(id));
+        Book book = bookDao.findOne(Integer.parseInt(id));
 
-		user.getBooks().add(book);
+        user.getBooks().add(book);
 
-	}
+    }
 
-	@Transactional
-	public void saveImage(Principal principal, MultipartFile multipartFile) {
+    @Transactional
+    public void saveImage(Principal principal, MultipartFile multipartFile) {
 
-		User user = userDao.findOne(Integer.parseInt(principal.getName()));
+        User user = userDao.findOne(Integer.parseInt(principal.getName()));
 
-		String path = System.getProperty("catalina.home") + "/resources/" + user.getName() + "/"
-				+ multipartFile.getOriginalFilename();
+        String path = System.getProperty("catalina.home") + "/resources/" + user.getName() + "/"
+                + multipartFile.getOriginalFilename();
 
-		user.setPathImage("resources/" + user.getName() + "/" + multipartFile.getOriginalFilename());
+        user.setPathImage("resources/" + user.getName() + "/" + multipartFile.getOriginalFilename());
 
-		File file = new File(path);
+        File file = new File(path);
 
-		try {
-			file.mkdirs();
-			try {
-				FileUtils.cleanDirectory(
-						new File(System.getProperty("catalina.home") + "/resources/" + user.getName() + "/"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			multipartFile.transferTo(file);
-		} catch (IOException e) {
-			System.out.println("error with file");
-		}
-	}
+        try {
+            file.mkdirs();
+            try {
+                FileUtils.cleanDirectory(
+                        new File(System.getProperty("catalina.home") + "/resources/" + user.getName() + "/"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            multipartFile.transferTo(file);
+        } catch (IOException e) {
+            System.out.println("error with file");
+        }
+    }
 
-	public User fetchUserWithBook(int id) {
-		return userDao.fetchUserWithBook(id);
-	}
+    public User fetchUserWithBook(int id) {
+        return userDao.fetchUserWithBook(id);
+    }
 
-	public User findByUUID(String uuid) {
-		return userDao.findByUUID(uuid);
-	}
+    public User findByUUID(String uuid) {
+        return userDao.findByUUID(uuid);
+    }
 
-	public void update(User user) {
-		userDao.save(user);
-	}
+    public void update(User user) {
+        userDao.save(user);
+    }
 
-	public Cookie intoBasket(int id, HttpServletRequest request,
-							 HttpServletResponse response) {
+    public Cookie intoBasket(int id, HttpServletRequest request,
+                             HttpServletResponse response) {
 
-		request.getSession(false);
-		Book book = bookDao.findOne(id);
+        request.getSession(false);
+        Book book = bookDao.findOne(id);
 
-		Cookie cookieBook =
-				new Cookie(book.getTitle(), String.valueOf(book.getId()));
-		cookieBook.setMaxAge(24 * 60 * 60 * 60);
-		cookieBook.setHttpOnly(true);
-		cookieBook.setPath("/");
+        Cookie cookieBook =
+                new Cookie(book.getTitle(), String.valueOf(book.getId()));
+        cookieBook.setMaxAge(24 * 60 * 60 * 60);
+        cookieBook.setHttpOnly(true);
+        cookieBook.setPath("/");
 
-		response.addCookie(cookieBook);
-		return cookieBook;
+        response.addCookie(cookieBook);
+        return cookieBook;
 
-	}
+    }
 
-	public List<Book> userBooksCookie(HttpServletRequest request) {
+    public List<Book> userBooksCookie(HttpServletRequest request) {
 
-		request.getSession(false);
-		List<Book> books = new ArrayList<>();
-		for (Cookie cookie : request.getCookies()) {
-			if (cookie.getName().equals("JSESSIONID")) {
-				
-			} else {
-				books.add(bookDao.findOne(Integer.parseInt(cookie.getValue())));
-			}
-		}
-		return books;
+        request.getSession(false);
+        List<Book> books = new ArrayList<>();
+        for (Cookie cookie : request.getCookies()) {
+            if (cookie.getName().equals("JSESSIONID")) {
 
-	}
+            } else {
+                books.add(bookDao.findOne(Integer.parseInt(cookie.getValue())));
+            }
+        }
+        return books;
 
-	@Transactional
-	@Override
-	public void getOrder(Principal principal, String id, HttpServletRequest request, 
-			HttpServletResponse response) {
+    }
 
-		User user = userDao.fetchUserWithBook(Integer.parseInt(principal.getName()));
-		Book book = bookDao.findOne(Integer.parseInt(id));
-		user.getBooks().add(book);
+    @Transactional
+    @Override
+    public void getOrder(Principal principal, String id, HttpServletRequest request,
+                         HttpServletResponse response) {
 
-		Cookie[] cookies = request.getCookies();
-		sortCookie(cookies, id, response);
+        User user = userDao.fetchUserWithBook(Integer.parseInt(principal.getName()));
+        Book book = bookDao.findOne(Integer.parseInt(id));
+        user.getBooks().add(book);
 
-	}
-	
-	
-		
-
-	@Override
-	public void deleteCookieFromOrder(String id, HttpServletRequest request, 
-			HttpServletResponse response) {
-		
-		Cookie[] cookies = request.getCookies();
+        Cookie[] cookies = request.getCookies();
         sortCookie(cookies, id, response);
-		
-	}
 
-	public void sortCookie(Cookie[] cookies, String id, HttpServletResponse response) {
+    }
+
+
+    @Override
+    public void deleteCookieFromOrder(String id, HttpServletRequest request,
+                                      HttpServletResponse response) {
+
+        Cookie[] cookies = request.getCookies();
+        sortCookie(cookies, id, response);
+
+    }
+
+    public void sortCookie(Cookie[] cookies, String id, HttpServletResponse response) {
         for (int i = 0; i < cookies.length; i++) {
             if (id.equals(cookies[i].getValue())) {
                 Cookie cookie = new Cookie(cookies[i].getName(), null);
-				cookie.setHttpOnly(true);
-				cookie.setPath("/");
-				cookie.setValue(null);
+                cookie.setHttpOnly(true);
+                cookie.setPath("/");
+                cookie.setValue(null);
                 cookie.setMaxAge(0);
                 response.addCookie(cookie);
             }
         }
-	}
+    }
 
-	@Override
-	public void updateProfile(User user) {
-		user.setPassword(encoder.encode(user.getPassword()));
-		userDao.save(user);
-	}
+    @Override
+    public void updateProfile(User user) {
+        user.setPassword(encoder.encode(user.getPassword()));
+        userDao.save(user);
+    }
+
+    public User innitalUserBooksCountries(Principal principal) {
+
+        User user = userDao.fetchUserWithBook(Integer.parseInt(principal.getName()));
+
+        for (Book book : user.getBooks()) {
+
+            Hibernate.initialize(book.getCountry().getCities());
+
+        }
+        return user;
+
+
+    }
+
+
+    public List<Book> clickOnBuuton(HttpServletRequest request){
+
+        request.getSession(false);
+
+        Cookie [] cookie = request.getCookies();
+
+        List<Book> books = new ArrayList<>();
+
+
+        for (Cookie cookie1 : cookie) {
+
+            books.add(bookDao.findOne(Integer.parseInt(cookie1.getValue())));
+
+
+        }
+
+        return books;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

@@ -40,7 +40,7 @@ public class CookieController {
 			HttpServletRequest request,
 			HttpServletResponse response) {
 
-		userService.getOrder(principal, id, request, response);
+		userService.getOrder(principal, id, request.getCookies(), response);
 
 		return "redirect:/profile";
 	}

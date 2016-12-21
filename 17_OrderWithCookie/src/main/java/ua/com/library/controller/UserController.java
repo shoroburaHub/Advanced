@@ -133,5 +133,9 @@ public class UserController {
 
 
 
-
+    @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
+    public void updateProfile(@RequestBody  User user) throws Exception {
+        System.out.println(user);
+        userService.save(user);
+    }
 }

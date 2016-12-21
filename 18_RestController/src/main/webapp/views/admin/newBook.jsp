@@ -7,26 +7,16 @@
 
 
 
-	<c:forEach var="book" items="${books}">
-		<div style="background-color: grey">
-			${book.title} ${book.pages} <a
-				href="deleteBook/${book.id}">delete</a>
-		</div>
-		<br>
-	</c:forEach>
+	
 
-	<form:form modelAttribute="book" action="saveBook" method="post">
-		<form:input path="title" placeholder="title" />
+	<form:form action="./saveBook?${_csrf.parameterName}=${_csrf.token}"
+			   method="post" enctype="multipart/form-data">
+
+		<input name="title" placeholder="title" />
 		<input name="pages" type="number" />
 		<input name="date" type="date">
 
-		<form:select path="country" items="${countriesDTOs}" itemLabel="name"
-			itemValue="id">
-		</form:select>
-
-		<form:select path="author" items="${authorsDTOs}" itemLabel="surname"
-			itemValue="id">
-		</form:select>
+		<input name="image" type="file">
 
 		<button>save book</button>
 	</form:form>

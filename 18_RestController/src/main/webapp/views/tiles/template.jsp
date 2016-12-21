@@ -7,16 +7,23 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>library</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="/js/jquery-3.1.1.min.js"></script>
     <link rel="stylesheet" href="/css/header.css">
     <script src="/js/jquery-3.1.1.min.js"></script>
 
+    <title>Your Website Title</title>
+    <!-- Comment #1: OG Tags -->
+    <meta property="og:url"           content="http://www.your-domain.com/your-page.html" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Your Website Title" />
+    <meta property="og:description"   content="Your description" />
+    <meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" />
+
 </head>
 <body>
-<header class="outer page-header">
+<%--<header class="outer page-header">
     <div class="container">
 
         <a href="/"><img src="/image/library.png" alt=" " class="page-logo pull-left" /></a>
@@ -63,7 +70,7 @@
 
 
     </div>
-</header>
+</header>--%>
 <br>
 <br>
 <br>

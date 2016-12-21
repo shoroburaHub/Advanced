@@ -20,6 +20,9 @@ public class Book {
 	private String title;
 	private int pages;
 	private LocalDate dateofPublic;
+
+	private String bookImage;
+
 	@ManyToOne
 	private Author author;
 	@ManyToOne
@@ -95,4 +98,12 @@ public class Book {
 		this.country = country;
 	}
 
+
+	public String getBookImage() {
+		return bookImage;
+	}
+
+	public void setBookImage(String bookImage) {
+		this.bookImage = bookImage;
+	}
 }

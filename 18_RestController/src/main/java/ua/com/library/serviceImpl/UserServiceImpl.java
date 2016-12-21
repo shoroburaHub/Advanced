@@ -155,14 +155,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 
 	@Transactional
-	public void getOrder(Principal principal, String id, HttpServletRequest request, 
+	public void getOrder(Principal principal, String id, Cookie [] cookies,
 			HttpServletResponse response) {
 
 		User user = userDao.fetchUserWithBook(Integer.parseInt(principal.getName()));
 		Book book = bookDao.findOne(Integer.parseInt(id));
 		user.getBooks().add(book);
 
-		Cookie[] cookies = request.getCookies();
 		sortCookie(cookies, id, response);
 
 	}
@@ -196,4 +195,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		user.setPassword(encoder.encode(user.getPassword()));
 		userDao.save(user);
 	}
+
+
+	@Transactional
+	@Override
+	public void join(int idUser, int idBook) {
+
+		User user = userDao.findOne(idUser);
+		Book book = bookDao.findOne(idBook);
+
+		user.getBooks().add(book);
+
+
+	}
+
 }

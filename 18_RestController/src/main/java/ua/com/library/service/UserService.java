@@ -45,9 +45,11 @@ public interface UserService {
     
     List<Book> userBooksCookie(HttpServletRequest request);
     
-    public void getOrder(Principal principal, String id, HttpServletRequest request, HttpServletResponse response);
+    public void getOrder(Principal principal, String id, Cookie [] cookies, HttpServletResponse response);
     
     public void deleteCookieFromOrder(String id, HttpServletRequest request, HttpServletResponse response);
     
-    
+
+    void join(int idUser, int idBook);
+
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import org.springframework.web.multipart.MultipartFile;
 import ua.com.library.dto.DtoUtilMapper;
 import ua.com.library.editor.AuthorEditor;
 import ua.com.library.editor.CountryEditor;
@@ -46,21 +47,24 @@ public class BookController {
 	@RequestMapping(value = "/newBook", method = RequestMethod.GET)
 	public String newBook(Model model) {
 
-		model.addAttribute("books", bookService.findAll());
-		model.addAttribute("book", new Book());
-		model.addAttribute("countriesDTOs", DtoUtilMapper.countriesToCountriesDTOs(countryService.findAll()));
-		model.addAttribute("authorsDTOs", DtoUtilMapper.authorsToAuthorsDTOs(authorService.findAll()));
+
 		return "views-admin-newBook";
 	}
 
 	@RequestMapping(value = "/saveBook", method = RequestMethod.POST)
-	public String saveBook(@ModelAttribute Book book, @RequestParam String pages, @RequestParam String date) {
+	public String saveBook(@RequestParam String title,
+						   @RequestParam String pages,
+						   @RequestParam String date,
+						   @RequestParam MultipartFile image) {
 
+		Book book = new Book();
+		book.setTitle(title);
 		book.setPages(Integer.parseInt(pages));
-
 		book.setDateofPublic(LocalDate.parse(date));
 
-		bookService.save(book);
+		bookService.save(book, image);
+
+
 
 		return "redirect:/newBook";
 	}
@@ -72,5 +76,14 @@ public class BookController {
 
 		return "redirect:/newBook";
 	}
+
+
+
+
+
+
+
+
+
 
 }

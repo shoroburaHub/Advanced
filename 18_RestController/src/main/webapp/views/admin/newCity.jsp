@@ -6,8 +6,8 @@
 
 <input type="text" id="nameCity">
 <select  id="idCountry">
-    <c:forEach var="country" items="${countries}">
-        <option value="${country.id}">${country.name}</option>
+    <c:forEach var="book" items="${countries}">
+        <option value="${book.id}">${book.name}</option>
     </c:forEach>
 </select>
 
