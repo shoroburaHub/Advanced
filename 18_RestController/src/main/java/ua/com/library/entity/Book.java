@@ -3,14 +3,7 @@ package ua.com.library.entity;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Book {
@@ -19,7 +12,7 @@ public class Book {
 	private int id;
 	private String title;
 	private int pages;
-	private LocalDate dateofPublic;
+	private LocalDate dateOfPublic;
 
 	private String bookImage;
 
@@ -32,15 +25,22 @@ public class Book {
 	@JoinTable(name = "user_book", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> users;
 
+
+	@OneToMany(mappedBy = "book")
+	private List<BookImage> bookImages;
+
+
+
+
 	public Book() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Book(String title, int pages) {
-		super();
 		this.title = title;
 		this.pages = pages;
 	}
+
 
 	public int getId() {
 		return id;
@@ -82,12 +82,12 @@ public class Book {
 		this.users = users;
 	}
 
-	public LocalDate getDateofPublic() {
-		return dateofPublic;
+	public LocalDate getDateOfPublic() {
+		return dateOfPublic;
 	}
 
-	public void setDateofPublic(LocalDate dateofPublic) {
-		this.dateofPublic = dateofPublic;
+	public void setDateOfPublic(LocalDate dateOfPublic) {
+		this.dateOfPublic = dateOfPublic;
 	}
 
 	public Country getCountry() {
@@ -105,5 +105,14 @@ public class Book {
 
 	public void setBookImage(String bookImage) {
 		this.bookImage = bookImage;
+	}
+
+
+	public List<BookImage> getBookImages() {
+		return bookImages;
+	}
+
+	public void setBookImages(List<BookImage> bookImages) {
+		this.bookImages = bookImages;
 	}
 }

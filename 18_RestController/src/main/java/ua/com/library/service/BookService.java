@@ -17,4 +17,8 @@ public interface BookService {
 	List<Book> liveSearch(String search);
 
 
+    void save(Book book);
+
+	List<Book> bookImges();
+
 }

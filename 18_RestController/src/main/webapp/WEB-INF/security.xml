@@ -15,7 +15,12 @@
         <security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
 
         <security:logout logout-url="/logout" logout-success-url="/"/>
-        
+        <security:remember-me key="uniqueAndSecret" user-service-ref="userDetailsService"
+                              remember-me-cookie="my-remember-me" remember-me-parameter="remember-me-param"/>
+
+
+
+
     </security:http>
 
     <security:authentication-manager>

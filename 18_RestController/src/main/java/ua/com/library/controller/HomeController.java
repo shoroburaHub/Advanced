@@ -36,7 +36,7 @@ public class HomeController {
 
 	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
 	public String home(Model model, Principal principal) {
-		model.addAttribute("books", DtoUtilMapper.booksToBooksDTO(bookService.findAll()));
+		model.addAttribute("books", bookService.bookImges());
 		return "views-base-home";
 	}
 
@@ -109,7 +109,15 @@ public class HomeController {
 		return DtoUtilMapper.booksToBooksDTO(bookList);
 	}
 
+	@PostMapping("/addBook")
+	public @ResponseBody List<BookDTO> addBook(@RequestBody Book book){
 
+		System.out.println("some");
+
+		bookService.save(book);
+
+		return DtoUtilMapper.booksToBooksDTO(bookService.findAll());
+	}
 
 
 

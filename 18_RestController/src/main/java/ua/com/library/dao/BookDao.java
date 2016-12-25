@@ -14,9 +14,14 @@ public interface BookDao extends JpaRepository<Book, Integer> {
     @Query("select b from Book b where b.pages > :pages")
     List<Book> sortBooks(@Param("pages") int pages);
 
-
     @Query("select b from Book b where b.title LIKE CONCAT('%',:search,'%')")
     List<Book> liveSearch(@Param("search") String search);
+
+    @Query("select b from Book b left join fetch b.bookImages where b.id =:id")
+    Book bookWithimages(@Param("id") int id);
+
+    @Query("select b from Book b left join fetch b.bookImages")
+    List<Book> bookImges();
 
 
 }

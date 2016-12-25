@@ -72,4 +72,15 @@ public class BookServiceImpl implements BookService{
 	public List<Book> liveSearch(String search) {
 		return bookDao.liveSearch(search);
 	}
+
+
+	@Override
+	public void save(Book book) {
+		bookDao.save(book);
+	}
+
+	@Override
+	public List<Book> bookImges() {
+		return bookDao.bookImges();
+	}
 }
