@@ -136,7 +136,7 @@ public class UserController {
 
 
 
-    @RequestMapping(value = "joinUserWhithBook/{idBook}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/joinUserWhithBook/{idBook}", method = RequestMethod.PUT)
     public String join(Principal principal, @PathVariable String idBook){
 
         userService.join(Integer.parseInt(principal.getName()),Integer.parseInt(idBook));

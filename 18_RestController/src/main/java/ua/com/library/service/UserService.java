@@ -52,4 +52,8 @@ public interface UserService {
 
     void join(int idUser, int idBook);
 
+
+
+    User findByName(String username);
+
 }

@@ -7,65 +7,27 @@
 <%@ taglib uri="http://www.springframework.org/security/tags"
            prefix="sec" %>
 
-<c:forEach var="book" items="${books}">
-    ${book.title} ${book.id}
-   
-    <c:forEach var="pic" items="${book.bookImages}">
-        <img src="${pic.path}" alt="" height="100px" width="100px">
-    </c:forEach>
-    
-    <br>
+
+<c:forEach var="book" items="${book}">
+
+    ${book.title} <div id="buy" onclick="buy(${book.id})">buy</div>
+
 
 </c:forEach>
-<br>
-<br>
-<br>
-<br>
-
-
-<sec:authentication property="name"/>
-
-<input type="text" id="title">
-<input type="number" id="pages">
-
-<button id="save">save Book</button>
-
-<input type="hidden" name="csrf_name"
-       value="${_csrf.parameterName}"/>
-<input type="hidden" name="csrf_value"
-       value="${_csrf.token}"/>
 
 <script>
 
-    document.getElementById('save').onclick = function () {
 
-
-        var book = {
-            title : document.getElementById('title').value,
-            pages : document.getElementById('pages').value
-        }
-
-        console.log(book);
+    function buy(index) {
 
         $.ajax({
 
-            url: 'addBook?' + $('input[name=csrf_name]').val() + "=" + $('input[name=csrf_value]').val(),
-            method: 'POST',
-            contentType: 'application/json; charset=UTF-8',
-            dataType: 'json',
-            data: JSON.stringify(book),
-            success : function (res) {
 
-                console.log(res);
-
-            }
 
 
         })
 
-
-
-
     }
+
 
 </script>

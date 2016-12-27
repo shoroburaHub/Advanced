@@ -21,4 +21,7 @@ public interface BookService {
 
 	List<Book> bookImges();
 
+
+	List<Book> sortBookByCountry(int idCountry);
+
 }

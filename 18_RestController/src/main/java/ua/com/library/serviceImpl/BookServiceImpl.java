@@ -83,4 +83,9 @@ public class BookServiceImpl implements BookService{
 	public List<Book> bookImges() {
 		return bookDao.bookImges();
 	}
+
+	@Override
+	public List<Book> sortBookByCountry(int idCountry) {
+		return bookDao.sortBookByCountry(idCountry);
+	}
 }

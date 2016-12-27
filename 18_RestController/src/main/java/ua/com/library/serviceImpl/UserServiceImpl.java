@@ -69,8 +69,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
 
-        System.out.println(userDao.findByName(name));
-
 		return userDao.findByName(name);
 	}
 
@@ -209,4 +207,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	}
 
+	@Override
+	public User findByName(String username) {
+		return userDao.findByName(username);
+	}
 }

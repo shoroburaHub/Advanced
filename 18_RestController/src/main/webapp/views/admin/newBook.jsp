@@ -1,22 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+         pageEncoding="ISO-8859-1" %>
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
+<input type="hidden" name="csrf_name"
+       value="${_csrf.parameterName}"/>
+<input type="hidden" name="csrf_value"
+       value="${_csrf.token}"/>
 
 
+<input type="text" id="title">
 
-	
+<button id="save">save</button>
 
-	<form:form action="./saveBook?${_csrf.parameterName}=${_csrf.token}"
-			   method="post" enctype="multipart/form-data">
 
-		<input name="title" placeholder="title" />
-		<input name="pages" type="number" />
-		<input name="date" type="date">
+<script>
 
-		<input name="image" type="file">
+    $('#save').click(function () {
 
-		<button>save book</button>
-	</form:form>
+        var book = {
+
+            title: $('#title').val()
+
+        }
+
+
+        $.ajax({
+
+            url: 'newBook?' + $('input[name=csrf_name]').val() + "=" + $('input[name=csrf_value]').val(),
+            method: 'POST',
+            contentType: 'application/json; charset=UTF-8',
+            dataType: 'json',
+            data: JSON.stringify(book),
+            success: function (res) {
+
+            }
+
+
+        })
+
+
+    })
+
+</script>

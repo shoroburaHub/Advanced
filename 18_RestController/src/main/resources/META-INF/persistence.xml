@@ -7,7 +7,7 @@
 
 		<properties>
 			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
-			<property name="hibernate.connection.url" value="jdbc:mysql://localhost/library" />
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost/library?UseUnicode=true&amp;characterEncoding=utf8" />
 			<property name="hibernate.connection.username" value="root" />
 			<property name="hibernate.connection.password" value="root" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
