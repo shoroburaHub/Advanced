@@ -76,7 +76,7 @@ public class BookServiceImpl implements BookService{
 	}
 
 
-	public List<Book> bookImges() {
+	public List<Book> bookImages() {
 		return bookDao.bookImges();
 	}
 

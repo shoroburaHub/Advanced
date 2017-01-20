@@ -14,6 +14,7 @@ import ua.com.library.validator.UserValidationMessages;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.util.Scanner;
 import java.util.UUID;
 
 @Controller
@@ -101,6 +102,20 @@ public class UserController {
 
     @RequestMapping(value = "/confirm/{uuid}", method = RequestMethod.GET)
     public String confirm(@PathVariable String uuid) {
+
+        try{
+
+
+
+        }catch (ArrayIndexOutOfBoundsException w){
+
+        }finally {
+            System.out.println();
+        }
+
+
+
+
 
         User user = userService.findByUUID(uuid);
         user.setEnabled(true);

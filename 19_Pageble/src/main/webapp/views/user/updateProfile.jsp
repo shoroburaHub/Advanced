@@ -20,7 +20,22 @@ update only image
 <br>
 <form:form action="./saveImage?${_csrf.parameterName}=${_csrf.token}"
            method="post" enctype="multipart/form-data">
-    <input type="file" name="image">
-    <button>save image</button>
+    <input type="file" name="image" id="image">
+    <button id="saveImage"></button>
 </form:form>
 <br>
+
+
+<script>
+
+    if(document.getElementById('image').value == ''){
+
+    }else{
+        document.getElementById('saveImage').textContent = 'saveImage';
+    }
+
+
+
+
+
+</script>

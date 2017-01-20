@@ -8,9 +8,9 @@ import ua.com.library.entity.Book;
 
 public interface BookService {
 
-	Page<Book> findAll(int currentPage, int numberOfItem);
-
 	List<Book> findAll();
+
+	Page<Book> findAll(int currentPage, int numberOfItem);
 
 	void save(Book book, MultipartFile imge);
 	Book findOne(int id);
@@ -23,6 +23,6 @@ public interface BookService {
 
     void save(Book book);
 
-	List<Book> bookImges();
+	List<Book> bookImages();
 
 }

@@ -1,5 +1,8 @@
 package ua.com.library.validator;
 
+import ua.com.library.entity.Book;
+import ua.com.library.entity.Role;
+
 public interface UserValidationMessages {
 
     String EMPTY_USERNAME_FIELD = "EMPTY_USERNAME_FIELD";

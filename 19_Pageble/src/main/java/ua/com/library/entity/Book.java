@@ -115,4 +115,5 @@ public class Book {
 	public void setBookImages(List<BookImage> bookImages) {
 		this.bookImages = bookImages;
 	}
+
 }

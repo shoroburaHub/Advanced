@@ -7,7 +7,16 @@
 <%@ taglib uri="http://www.springframework.org/security/tags"
            prefix="sec" %>
 
-home
+- mapping;
+- validation;
+- security;
+- security link;
+- buy something;
+- js
+- save image
+- dto
+
+
 <br>
 
 
@@ -30,14 +39,14 @@ home
 </c:if>
 
 
-<c:forTokens var="page" items="${pages}" delims="-">
-    <a href="/pageable/${page}/5">${page}</a>
+<c:forTokens var="page" items="${pages}" delims="-"><%--0-1-2-3-4-5-6--%>
+
+    <a href="/pageable/${page}/10">${page}</a>
+
 </c:forTokens>
 
 
 <c:if test="${currentPage < totalPages}">
     <a href="/pageable/${books.number+1}/5">next</a>
 </c:if>
-
-
 

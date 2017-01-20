@@ -9,7 +9,7 @@ import ua.com.library.entity.Book;
 
 import java.util.List;
 
-public interface BookDao extends JpaRepository<Book, Integer>, PagingAndSortingRepository<Book, Integer> {
+public interface BookDao extends JpaRepository<Book, Integer>{
 
 
     @Query("select b from Book b where b.pages > :pages")
@@ -24,5 +24,9 @@ public interface BookDao extends JpaRepository<Book, Integer>, PagingAndSortingR
     @Query("select b from Book b left join fetch b.bookImages")
     List<Book> bookImges();
 
+
+    public default void some(){
+        System.out.println();
+    }
 
 }

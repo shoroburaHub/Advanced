@@ -17,8 +17,7 @@ import ua.com.library.service.CityService;
 import ua.com.library.service.CountryService;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class HomeController {
@@ -45,8 +44,9 @@ public class HomeController {
         for(int i = 0; i < books.getTotalPages(); i++){
 
             pages+= i+ "-";
-        }
 
+        }
+        //0-1-2-3-4-5-6
 
         model.addAttribute("totalPages", books.getTotalPages());
 
@@ -59,7 +59,19 @@ public class HomeController {
     @GetMapping("/pageable/{currentPage}/{totalElement}")
     public String pageable(@PathVariable int currentPage, @PathVariable int totalElement, Model model) {
 
+
+
+
+
+
+
+
+
+
         Page<Book> books = bookService.findAll(currentPage, totalElement);
+
+        List<BookDTO> bookDTOS = DtoUtilMapper.booksToBooksDTO(books.getContent());
+
 
         String pages = "";
 
