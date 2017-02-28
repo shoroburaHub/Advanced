@@ -20,6 +20,7 @@ public class NewsPortalServiceImpl implements NewsPortalService{
     @Override
     public void save(NewsPortal newsPortal) {
         newsPortalDao.save(newsPortal);
+
     }
 
     @Override

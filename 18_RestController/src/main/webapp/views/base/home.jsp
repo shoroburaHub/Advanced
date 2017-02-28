@@ -8,26 +8,4 @@
            prefix="sec" %>
 
 
-<c:forEach var="book" items="${book}">
-
-    ${book.title} <div id="buy" onclick="buy(${book.id})">buy</div>
-
-
-</c:forEach>
-
-<script>
-
-
-    function buy(index) {
-
-        $.ajax({
-
-
-
-
-        })
-
-    }
-
-
-</script>
+hello

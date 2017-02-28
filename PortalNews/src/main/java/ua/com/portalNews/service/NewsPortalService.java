@@ -13,6 +13,7 @@ public interface NewsPortalService {
     List<NewsPortal> findAll();
     NewsPortal findOne(int id);
     void delete(int id);
+
 }
 
 
